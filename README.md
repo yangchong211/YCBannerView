@@ -61,11 +61,9 @@ private void initBanner() {
 - 2.3 支持自定义hintView，十分灵活，拓展性强
 
 ## 3.图片展示
-- 3.1 模糊视图
-- ![image](https://github.com/yangchong211/YCUtils/blob/master/image/Screenshot_1.png)
-
-- 3.2全局Loading加载窗
-- ![image](https://github.com/yangchong211/YCUtils/blob/master/image/Screenshot_2.png)
+- 3.1 轮播图截图
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/1.png)
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
 
 ## 4.其他介绍
 **4.1版本更新说明**
