@@ -18,7 +18,6 @@ import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 /**
  * Created by PC on 2017/11/21.
  * 作者：PC
- * https://github.com/Jude95/RollViewPager/blob/master/README_ch.md
  */
 
 public class ThirdActivity extends AppCompatActivity {
