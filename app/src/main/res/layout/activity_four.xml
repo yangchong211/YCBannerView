@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <com.yc.cn.ycbannerlib.first.BannerView
+        android:id="@+id/banner"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:hint_mode="number"
+        app:hint_gravity="right"
+        app:hint_color="@color/colorPrimary"/>
+
+
+</LinearLayout>

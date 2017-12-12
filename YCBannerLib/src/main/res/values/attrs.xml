@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BannerView">
+        <attr name="hint_mode">         <!--轮播图红点是1，数字是2-->
+            <enum name="point" value="0" />
+            <enum name="number" value="1" />
+        </attr>
+        <attr name="hint_gravity">      <!--轮播图红点或数字的位置，左，中，右-->
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="hint_paddingRight" format="dimension"/>
+        <attr name="hint_paddingLeft" format="dimension"/>
+        <attr name="hint_paddingTop" format="dimension"/>
+        <attr name="hint_paddingBottom" format="dimension"/>
+        <attr name="play_delay" format="integer" />
+        <attr name="hint_color" format="color" />
+        <attr name="hint_alpha" format="integer" />
+    </declare-styleable>
+
+</resources>
