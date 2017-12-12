@@ -53,6 +53,24 @@ private void initBanner() {
     }
 ```
 - 1.4 关于轮播图属性
+- 关于暂停和开始轮播方法，建议加上
+```
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(banner!=null){
+            banner.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(banner!=null){
+            banner.resume();
+        }
+    }
+```
 - 请参考代码，已经做出了很详细的注释
 
 ## 2.功能说明
