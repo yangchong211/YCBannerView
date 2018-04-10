@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -24,6 +25,8 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 import com.yc.cn.ycbannerlib.adapter.AbsLoopPagerAdapter;
+import com.yc.cn.ycbannerlib.hintview.ShapeHintView;
+import com.yc.cn.ycbannerlib.hintview.TextHintView;
 import com.yc.cn.ycbannerlib.inter.BaseHintView;
 import com.yc.cn.ycbannerlib.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.inter.HintViewDelegate;
@@ -58,6 +61,10 @@ public class BannerView extends RelativeLayout {
     private GestureDetector mGestureDetector;
 
 	private long mRecentTouchTime;
+    /**
+     * 指示器类型
+     */
+    private int hintMode;
     /**
      * 播放延迟
      */
@@ -98,6 +105,7 @@ public class BannerView extends RelativeLayout {
         }
     };
 
+
     /**
      * 让外界在代码中new对象时调用
      * @param context           上下文
@@ -136,7 +144,8 @@ public class BannerView extends RelativeLayout {
 		}
 
 		TypedArray type = getContext().obtainStyledAttributes(attrs, R.styleable.BannerView);
-		gravity = type.getInteger(R.styleable.BannerView_hint_gravity, 1);
+        hintMode = type.getInteger(R.styleable.BannerView_hint_mode, 0);
+        gravity = type.getInteger(R.styleable.BannerView_hint_gravity, 1);
 		delay = type.getInt(R.styleable.BannerView_play_delay, 0);
 		color = type.getColor(R.styleable.BannerView_hint_color, Color.BLACK);
 		alpha = type.getInt(R.styleable.BannerView_hint_alpha, 0);
@@ -152,8 +161,15 @@ public class BannerView extends RelativeLayout {
                 , LayoutParams.MATCH_PARENT));
 		addView(mViewPager);
 		type.recycle();
-		initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
-                , Color.parseColor("#88ffffff")));
+		if(hintMode==0){
+            initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
+                    , Color.parseColor("#88ffffff")));
+        }else if(hintMode==1){
+            initHint(new TextHintView(getContext()));
+        }else {
+            initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
+                    , Color.parseColor("#88ffffff")));
+        }
         initGestureDetector();
 	}
 
@@ -189,9 +205,7 @@ public class BannerView extends RelativeLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //获得此ViewGroup上级容器为其推荐的宽和高，以及计算模式
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         // 计算出所有的childView的宽和高
         measureChildren(widthMeasureSpec, heightMeasureSpec);
@@ -344,18 +358,19 @@ public class BannerView extends RelativeLayout {
 	@TargetApi(Build.VERSION_CODES.KITKAT)
     public void setAnimationDuration(final int during){
 		try {
-			// viePager平移动画事件
+			// viewPager平移动画事件
 			Field mField = ViewPager.class.getDeclaredField("mScroller");
 			mField.setAccessible(true);
-			Scroller mScroller = new Scroller(getContext(),
-					// 动画效果与ViewPager的一致
-                    new Interpolator() {
-                        @Override
-                        public float getInterpolation(float t) {
-                            t -= 1.0f;
-                            return t * t * t * t * t + 1.0f;
-                        }
-                    }) {
+            // 动画效果与ViewPager的一致
+            Interpolator interpolator = new Interpolator() {
+
+                @Override
+                public float getInterpolation(float t) {
+                    t -= 1.0f;
+                    return t * t * t * t * t + 1.0f;
+                }
+            };
+            Scroller mScroller = new Scroller(getContext(),interpolator){
 
                 @Override
                 public void startScroll(int startX, int startY, int dx, int dy, int duration) {
