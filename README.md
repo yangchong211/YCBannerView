@@ -166,3 +166,12 @@ protected void onResume() {
 - [说明及截图](https://github.com/yangchong211/YCRefreshView/blob/master/README.md)
 - 具体详细的开发说明文档，可以直接查看上面链接说明
 
+<<<<<<< HEAD
+=======
+**4.3其他**
+- 知乎：https://www.zhihu.com/people/yang-chong-69-24/pins/posts
+- 简书：http://www.jianshu.com/u/b7b2c6ed9284
+- csdn：http://my.csdn.net/m0_37700275
+- github：https://github.com/yangchong211
+- 喜马拉雅听书：http://www.ximalaya.com/zhubo/71989305/
+>>>>>>> 9759edd9231b737065143452ae8a6b9c334a0169
