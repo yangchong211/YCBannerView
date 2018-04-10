@@ -1,24 +1,25 @@
-package com.yc.cn.ycbanner.four;
+package com.yc.cn.ycbanner;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbanner.R;
-import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
-import com.yc.cn.ycbannerlib.first.util.SizeUtil;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.adapter.AbsDynamicPagerAdapter;
+import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.inter.OnPageListener;
 
 /**
  * Created by PC on 2017/11/21.
  * 作者：PC
  */
 
-public class FourActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity {
 
     private int[] imgs = {
             R.drawable.bg_kites_min,
@@ -53,27 +54,31 @@ public class FourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_four);
+        setContentView(R.layout.activity_first);
 
         initBanner();
     }
 
     private void initBanner() {
         banner = (BannerView) findViewById(R.id.banner);
-        banner.setAnimationDuration(1000);
-        banner.setHintPadding(0, SizeUtil.dip2px(this,10f),0,SizeUtil.dip2px(this,10f));
         banner.setPlayDelay(2000);
         banner.setAdapter(new ImageNormalAdapter());
-        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
+        banner.setHintGravity(1);
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(FourActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FirstActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
+            }
+        });
+        banner.setOnPageListener(new OnPageListener() {
+            @Override
+            public void onPageChange(int position) {
+
             }
         });
     }
 
-
-    private class ImageNormalAdapter extends StaticPagerAdapter {
+    private class ImageNormalAdapter extends AbsDynamicPagerAdapter {
 
         @Override
         public View getView(ViewGroup container, int position) {
@@ -83,6 +88,7 @@ public class FourActivity extends AppCompatActivity {
             view.setImageResource(imgs[position]);
             return view;
         }
+
 
         @Override
         public int getCount() {

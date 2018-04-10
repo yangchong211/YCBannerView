@@ -1,4 +1,4 @@
-package com.yc.cn.ycbanner.third;
+package com.yc.cn.ycbanner;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbanner.R;
-import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbannerlib.first.adapter.LoopPagerAdapter;
-import com.yc.cn.ycbannerlib.first.util.SizeUtil;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.adapter.AbsLoopPagerAdapter;
+import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.
@@ -68,7 +68,7 @@ public class ThirdActivity extends AppCompatActivity {
         banner.setHintPadding(0, SizeUtil.dip2px(this,10f),0,SizeUtil.dip2px(this,10f));
         banner.setPlayDelay(2000);
         banner.setAdapter(new ImageNormalAdapter(banner));
-        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(ThirdActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
@@ -77,7 +77,7 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
 
-    private class ImageNormalAdapter extends LoopPagerAdapter {
+    private class ImageNormalAdapter extends AbsLoopPagerAdapter {
 
         ImageNormalAdapter(BannerView viewPager) {
             super(viewPager);

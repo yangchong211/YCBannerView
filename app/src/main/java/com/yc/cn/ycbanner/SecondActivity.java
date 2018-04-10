@@ -1,4 +1,4 @@
-package com.yc.cn.ycbanner.second;
+package com.yc.cn.ycbanner;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbanner.R;
-import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.adapter.AbsStaticPagerAdapter;
+import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.
@@ -60,7 +61,10 @@ public class SecondActivity extends AppCompatActivity {
     private void initBanner() {
         banner = (BannerView) findViewById(R.id.banner);
         banner.setAdapter(new ImageNormalAdapter());
-        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
+        banner.setHintGravity(1);
+        banner.setHintPadding(SizeUtil.dip2px(this,10),0,
+                SizeUtil.dip2px(this,10),SizeUtil.dip2px(this,10));
+        banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(SecondActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
@@ -69,7 +73,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 
-    private class ImageNormalAdapter extends StaticPagerAdapter {
+    private class ImageNormalAdapter extends AbsStaticPagerAdapter {
         @Override
         public View getView(ViewGroup container, int position) {
             ImageView view = new ImageView(container.getContext());

@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.first.adapter;
+package com.yc.cn.ycbannerlib.adapter;
 
 
 import android.support.v4.view.PagerAdapter;
@@ -8,11 +8,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
+
 /**
- * 静态存储的Adapter。概念参照{@link android.support.v4.app.FragmentStatePagerAdapter}
- * view添加进去就不管了，View长在，内存不再。
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/3/18
+ *     desc  : 静态存储的Adapter,概念参照{@link android.support.v4.app.FragmentStatePagerAdapter}
+ *             view添加进去就不管了，View长在，内存不再
+ *     revise:
+ * </pre>
  */
-public abstract class StaticPagerAdapter extends PagerAdapter {
+public abstract class AbsStaticPagerAdapter extends PagerAdapter {
 
     private ArrayList<View> mViewList = new ArrayList<>();
 

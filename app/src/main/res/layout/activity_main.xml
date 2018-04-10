@@ -40,4 +40,21 @@
         android:padding="10dp"
         android:text="4.静态储存轮播图的adapter，显示数字"/>
 
+
+    <TextView
+        android:id="@+id/tv_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="5.启动图"/>
+
+    <TextView
+        android:id="@+id/tv_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="6.自定义指示器图标轮播图"/>
+
 </LinearLayout>

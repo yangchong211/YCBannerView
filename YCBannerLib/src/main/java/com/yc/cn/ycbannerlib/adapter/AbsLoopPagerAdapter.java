@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.first.adapter;
+package com.yc.cn.ycbannerlib.adapter;
 
 import android.annotation.TargetApi;
 import android.database.DataSetObserver;
@@ -8,20 +8,29 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yc.cn.ycbannerlib.first.hintview.BaseHintView;
-import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.inter.BaseHintView;
+import com.yc.cn.ycbannerlib.inter.HintViewDelegate;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-
-public abstract class LoopPagerAdapter extends PagerAdapter {
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/3/18
+ *     desc  : AbsLoopPagerAdapter
+ *     revise:
+ * </pre>
+ */
+public abstract class AbsLoopPagerAdapter extends PagerAdapter {
 
     private BannerView mViewPager;
 
     private ArrayList<View> mViewList = new ArrayList<>();
 
-    private class LoopHintViewDelegate implements BannerView.HintViewDelegate{
+    private class LoopHintViewDelegate implements HintViewDelegate {
         @Override
         public void setCurrentPosition(int position, BaseHintView hintView) {
             if (hintView!=null&&getRealCount()>0){
@@ -74,7 +83,7 @@ public abstract class LoopPagerAdapter extends PagerAdapter {
         }
     }
 
-    public LoopPagerAdapter(BannerView viewPager){
+    public AbsLoopPagerAdapter(BannerView viewPager){
         this.mViewPager = viewPager;
         viewPager.setHintViewDelegate(new LoopHintViewDelegate());
     }
@@ -110,7 +119,6 @@ public abstract class LoopPagerAdapter extends PagerAdapter {
         return view;
     }
 
-    public abstract View getView(ViewGroup container, int position);
 
     @Deprecated
     @Override
@@ -119,4 +127,7 @@ public abstract class LoopPagerAdapter extends PagerAdapter {
     }
 
     public abstract int getRealCount();
+
+    public abstract View getView(ViewGroup container, int position);
+
 }

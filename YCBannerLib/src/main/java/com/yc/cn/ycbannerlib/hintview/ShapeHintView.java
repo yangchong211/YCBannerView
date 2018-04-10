@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.first.hintview;
+package com.yc.cn.ycbannerlib.hintview;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,15 +7,25 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.yc.cn.ycbannerlib.inter.BaseHintView;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/3/18
+ *     desc  : shape图形
+ *     revise:
+ * </pre>
+ */
 public abstract class ShapeHintView extends LinearLayout implements BaseHintView {
 
 	private ImageView[] mDots;
 	private int length = 0;
 	private int lastPosition = 0;
 	
-	private Drawable dot_normal;
-	private Drawable dot_focus;
+	private Drawable dotNormal;
+	private Drawable dotFocus;
 	
 	public ShapeHintView(Context context){
 		super(context);
@@ -36,29 +46,31 @@ public abstract class ShapeHintView extends LinearLayout implements BaseHintView
 		lastPosition = 0;
 		setOrientation(HORIZONTAL);
 		switch (gravity) {
-		case 0:
-			setGravity(Gravity.LEFT| Gravity.CENTER_VERTICAL);
-			break;
-		case 1:
-			setGravity(Gravity.CENTER);
-			break;
-		case 2:
-			setGravity(Gravity.RIGHT| Gravity.CENTER_VERTICAL);
-			break;
+			case 0:
+				setGravity(Gravity.START| Gravity.CENTER_VERTICAL);
+				break;
+			case 1:
+				setGravity(Gravity.CENTER);
+				break;
+			case 2:
+				setGravity(Gravity.END| Gravity.CENTER_VERTICAL);
+				break;
+			default:
+				break;
 		}
 		
 		this.length = length;
 		mDots = new ImageView[length];
-		
-		dot_focus = makeFocusDrawable();
-		dot_normal = makeNormalDrawable();
+
+		dotFocus = makeFocusDrawable();
+		dotNormal = makeNormalDrawable();
 		
         for (int i = 0; i < length; i++) {  
         	mDots[i]=new ImageView(getContext());
         	LayoutParams dotlp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         	dotlp.setMargins(10, 0, 10, 0); 
         	mDots[i].setLayoutParams(dotlp);
-        	mDots[i].setBackgroundDrawable(dot_normal);
+        	mDots[i].setBackgroundDrawable(dotNormal);
         	addView(mDots[i]);
         }
         setCurrent(0);
@@ -69,8 +81,8 @@ public abstract class ShapeHintView extends LinearLayout implements BaseHintView
 		if (current < 0 || current > length - 1) {  
             return;  
         } 
-        mDots[lastPosition].setBackgroundDrawable(dot_normal);
-        mDots[current].setBackgroundDrawable(dot_focus);
+        mDots[lastPosition].setBackgroundDrawable(dotNormal);
+        mDots[current].setBackgroundDrawable(dotFocus);
         lastPosition = current;  
 	}
 }

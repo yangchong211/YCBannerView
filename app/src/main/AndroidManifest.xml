@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -15,10 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".first.FirstActivity"/>
-        <activity android:name=".second.SecondActivity"/>
-        <activity android:name=".third.ThirdActivity"/>
-        <activity android:name=".four.FourActivity"/>
+        <activity android:name=".FirstActivity"/>
+        <activity android:name=".SecondActivity"/>
+        <activity android:name=".ThirdActivity"/>
+        <activity android:name=".FourActivity"/>
+        <activity android:name=".SplashActivity"/>
+        <activity android:name=".SixActivity"/>
     </application>
 
 </manifest>

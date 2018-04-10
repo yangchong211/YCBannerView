@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.first.hintview;
+package com.yc.cn.ycbannerlib.hintview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,9 +9,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 
-import com.yc.cn.ycbannerlib.first.util.SizeUtil;
+import com.yc.cn.ycbannerlib.util.SizeUtil;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/3/18
+ *     desc  : icon
+ *     revise:
+ * </pre>
+ */
 public class IconHintView extends ShapeHintView {
 
     private int focusResId;

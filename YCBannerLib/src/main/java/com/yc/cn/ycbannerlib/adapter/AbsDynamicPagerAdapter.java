@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.first.adapter;
+package com.yc.cn.ycbannerlib.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -6,10 +6,16 @@ import android.view.ViewGroup;
 
 
 /**
- * 动态管理的Adapter。概念参照{@link android.support.v4.app.FragmentPagerAdapter}
- * 每次都会创建新view，销毁旧View。节省内存消耗性能
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/3/18
+ *     desc  : 动态管理的Adapter。概念参照{@link android.support.v4.app.FragmentPagerAdapter}
+ *             每次都会创建新view，销毁旧View。节省内存消耗性能
+ *     revise:
+ * </pre>
  */
-public abstract class DynamicPagerAdapter extends PagerAdapter {
+public abstract class AbsDynamicPagerAdapter extends PagerAdapter {
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
@@ -32,6 +38,7 @@ public abstract class DynamicPagerAdapter extends PagerAdapter {
 		container.addView(itemView);
 		return itemView;
 	}
+
 	public abstract View getView(ViewGroup container, int position);
 
 }
