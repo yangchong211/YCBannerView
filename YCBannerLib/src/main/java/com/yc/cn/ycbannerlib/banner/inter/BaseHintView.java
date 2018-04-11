@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.inter;
+package com.yc.cn.ycbannerlib.banner.inter;
 
 /**
  * <pre>

@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.hintview;
+package com.yc.cn.ycbannerlib.banner.hintview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import com.yc.cn.ycbannerlib.inter.BaseHintView;
+import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 
 /**
  * <pre>

@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.BannerView;
-import com.yc.cn.ycbannerlib.adapter.AbsStaticPagerAdapter;
-import com.yc.cn.ycbannerlib.hintview.IconHintView;
-import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.util.SizeUtil;
+import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
+import com.yc.cn.ycbannerlib.banner.hintview.IconHintView;
+import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.

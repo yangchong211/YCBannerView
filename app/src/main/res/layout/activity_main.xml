@@ -57,4 +57,21 @@
         android:padding="10dp"
         android:text="6.自定义指示器图标轮播图"/>
 
+    <!--上下滚动TextView-->
+    <com.yc.cn.ycbannerlib.marquee.MarqueeView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/marqueeView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        app:paddingStart="0dp"
+        app:mvAnimDuration="1000"
+        app:mvInterval="2000"
+        app:mvTextColor="#464C4E"
+        app:mvTextSize="16sp"
+        app:mvSingleLine="true"/>
+
 </LinearLayout>

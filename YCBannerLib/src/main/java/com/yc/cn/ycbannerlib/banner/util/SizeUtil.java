@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.util;
+package com.yc.cn.ycbannerlib.banner.util;
 
 import android.content.Context;
 

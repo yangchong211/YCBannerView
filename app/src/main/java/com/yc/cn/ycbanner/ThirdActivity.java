@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.BannerView;
-import com.yc.cn.ycbannerlib.adapter.AbsLoopPagerAdapter;
-import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.util.SizeUtil;
+import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
+import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.

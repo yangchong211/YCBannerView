@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.adapter;
+package com.yc.cn.ycbannerlib.banner.adapter;
 
 import android.annotation.TargetApi;
 import android.database.DataSetObserver;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yc.cn.ycbannerlib.BannerView;
-import com.yc.cn.ycbannerlib.inter.BaseHintView;
-import com.yc.cn.ycbannerlib.inter.HintViewDelegate;
+import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
+import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

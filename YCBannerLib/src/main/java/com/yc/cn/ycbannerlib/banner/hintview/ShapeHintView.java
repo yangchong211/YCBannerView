@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.hintview;
+package com.yc.cn.ycbannerlib.banner.hintview;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.yc.cn.ycbannerlib.inter.BaseHintView;
+import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 
 /**
  * <pre>

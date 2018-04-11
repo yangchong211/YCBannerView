@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.adapter;
+package com.yc.cn.ycbannerlib.banner.adapter;
 
 
 import android.support.v4.view.PagerAdapter;

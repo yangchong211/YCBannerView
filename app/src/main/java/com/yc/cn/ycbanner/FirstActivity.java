@@ -3,16 +3,15 @@ package com.yc.cn.ycbanner;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.BannerView;
-import com.yc.cn.ycbannerlib.adapter.AbsDynamicPagerAdapter;
-import com.yc.cn.ycbannerlib.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.inter.OnPageListener;
+import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
+import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
+import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
 
 /**
  * Created by PC on 2017/11/21.

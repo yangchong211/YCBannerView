@@ -1,11 +1,11 @@
-package com.yc.cn.ycbannerlib.hintview;
+package com.yc.cn.ycbannerlib.banner.hintview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
-import com.yc.cn.ycbannerlib.util.SizeUtil;
+import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * <pre>
