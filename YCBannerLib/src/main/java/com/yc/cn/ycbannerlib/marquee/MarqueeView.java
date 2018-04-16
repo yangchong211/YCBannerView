@@ -19,7 +19,16 @@ import com.yc.cn.ycbannerlib.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/1/18
+ *     desc  : v1.0 17年1月18日
+ *             v1.1 17年4月7日
+ *     revise:
+ * </pre>
+ */
 public class MarqueeView extends ViewFlipper {
 
     private Context mContext;
@@ -135,9 +144,12 @@ public class MarqueeView extends ViewFlipper {
         if (notices == null || notices.size() == 0) {
             return false;
         }
+        //先移除所有view
         removeAllViews();
+        //然后重置动画
         resetAnimation();
 
+        //根据设置的数据集合数量创建TextView
         for (int i = 0; i < notices.size(); i++) {
             final TextView textView = createTextView(notices.get(i), i);
             final int finalI = i;
@@ -152,6 +164,7 @@ public class MarqueeView extends ViewFlipper {
             addView(textView);
         }
 
+        //如果集合数目大于1，则开始；否则停止
         if (notices.size() > 1) {
             startFlipping();
         } else {
@@ -160,14 +173,20 @@ public class MarqueeView extends ViewFlipper {
         return true;
     }
 
+
+    /**
+     * 重置动画
+     */
     private void resetAnimation(){
         clearAnimation();
+        //设置进入的动画
         Animation animIn = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_in);
         if (isSetAnimDuration) {
             animIn.setDuration(animDuration);
         }
         setInAnimation(animIn);
 
+        //设置结束的动画
         Animation animOut = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_out);
         if (isSetAnimDuration) {
             animOut.setDuration(animDuration);
@@ -179,7 +198,7 @@ public class MarqueeView extends ViewFlipper {
      * 创建ViewFlipper下的TextView
      * @param text                  text
      * @param position              position
-     * @return
+     * @return                      TextView
      */
     private TextView createTextView(CharSequence text, int position) {
         TextView tv = new TextView(mContext);
@@ -192,6 +211,10 @@ public class MarqueeView extends ViewFlipper {
         return tv;
     }
 
+    /**
+     * 获取当前索引位置
+     * @return                      索引
+     */
     public int getPosition() {
         return (int) getCurrentView().getTag();
     }
@@ -200,10 +223,18 @@ public class MarqueeView extends ViewFlipper {
         return notices;
     }
 
+    /**
+     * 设置数据集合
+     * @param notices               数据
+     */
     public void setNotices(List<? extends CharSequence> notices) {
         this.notices = notices;
     }
 
+    /**
+     * 设置点击事件
+     * @param onItemClickListener   点击事件listener
+     */
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

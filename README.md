@@ -1,10 +1,12 @@
 ## YCBanner轮播图
 - 主要引导界面滑动导航 + 大于1页时无限轮播 + 自定义指示器
+- 项目地址：https://github.com/yangchong211/YCBanner
 
 
 ### 目录介绍
 - 1.功能说明
 - 2.使用说明
+- 2.5 如何显示红点，文字，自定义icon等
 - 3.图片展示
 - 4.其他介绍
 
@@ -20,9 +22,10 @@
 
 
 ### 2.使用说明
-- 2.1 直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3'
+- 2.1 直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.2'
 - 关于具体的使用方法，可以直接参考代码
 - 2.2 在布局中写，可以设置选择的属性值
+
 ```
 <com.yc.cn.ycbannerlib.BannerView
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,9 +36,11 @@
     app:hint_gravity="center"
     app:hint_mode="point"
     app:play_delay="2000"/>
-
 ```
+
+
 - 2.3 在代码中，自定义adapter适配器，继承自己合适的adapter。目前支持继承动态管理adapter，静态管理adapter，和无限轮播adapter
+
 ```
 private void initBanner() {
     banner = (BannerView) findViewById(R.id.banner);
@@ -73,8 +78,11 @@ private class ImageNormalAdapter extends AbsStaticPagerAdapter {
     }
 }
 ```
-- 2.4 关于轮播图属性
+
+
+- **2.4 关于轮播图属性**
 - 关于暂停和开始轮播方法，建议加上
+
 ```
 @Override
 protected void onPause() {
@@ -92,6 +100,19 @@ protected void onResume() {
     }
 }
 ```
+
+
+- **2.5 如何显示红点，文字，自定义icon等**
+- **a.设置文本添加代码**：
+- banner.setHintView(new TextHintView(this));
+- **b.设置自定义icon添加代码：**
+-  banner.setHintView(new IconHintView(this,R.drawable.point_focus,R.drawable.point_normal));
+-  **c.默认不添加该方法则是显示圆点**
+
+
+
+
+
 - 请参考代码，已经做出了很详细的注释
 
 
@@ -100,6 +121,7 @@ protected void onResume() {
 - 3.1 轮播图截图
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/1.png)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
+
 
 ## 4.其他介绍
 **4.1版本更新说明**
@@ -166,12 +188,3 @@ protected void onResume() {
 - [说明及截图](https://github.com/yangchong211/YCRefreshView/blob/master/README.md)
 - 具体详细的开发说明文档，可以直接查看上面链接说明
 
-<<<<<<< HEAD
-=======
-**4.3其他**
-- 知乎：https://www.zhihu.com/people/yang-chong-69-24/pins/posts
-- 简书：http://www.jianshu.com/u/b7b2c6ed9284
-- csdn：http://my.csdn.net/m0_37700275
-- github：https://github.com/yangchong211
-- 喜马拉雅听书：http://www.ximalaya.com/zhubo/71989305/
->>>>>>> 9759edd9231b737065143452ae8a6b9c334a0169

@@ -67,9 +67,9 @@ public abstract class ShapeHintView extends LinearLayout implements BaseHintView
 		
         for (int i = 0; i < length; i++) {  
         	mDots[i]=new ImageView(getContext());
-        	LayoutParams dotlp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	dotlp.setMargins(10, 0, 10, 0); 
-        	mDots[i].setLayoutParams(dotlp);
+        	LayoutParams dotLp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			dotLp.setMargins(10, 0, 10, 0);
+        	mDots[i].setLayoutParams(dotLp);
         	mDots[i].setBackgroundDrawable(dotNormal);
         	addView(mDots[i]);
         }
