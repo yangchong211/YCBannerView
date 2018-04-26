@@ -252,15 +252,20 @@ public class BannerView extends RelativeLayout {
         @Override
         public void handleMessage(Message msg) {
             BannerView rollPagerView = mRollPagerView.get();
-            int cur = rollPagerView.getViewPager().getCurrentItem()+1;
-            if(cur>=rollPagerView.mAdapter.getCount()){
-                cur=0;
-            }
-            rollPagerView.getViewPager().setCurrentItem(cur);
-            rollPagerView.mHintViewDelegate.setCurrentPosition(cur,
-                    (BaseHintView) rollPagerView.mHintView);
-			if (rollPagerView.mAdapter.getCount()<=1){
-                rollPagerView.stopPlay();
+            //注意这个地方需要添加非空判断
+            if(rollPagerView!=null){
+                int cur = rollPagerView.getViewPager().getCurrentItem()+1;
+                //如果cur大于或等于轮播图数量，那么播放到最后一张后时，接着轮播便是索引为0的图片
+                if(cur>=rollPagerView.mAdapter.getCount()){
+                    cur=0;
+                }
+                rollPagerView.getViewPager().setCurrentItem(cur);
+                rollPagerView.mHintViewDelegate.setCurrentPosition(cur,
+                        (BaseHintView) rollPagerView.mHintView);
+                //假如说轮播图只有一张，那么就停止轮播
+                if (rollPagerView.mAdapter.getCount()<=1){
+                    rollPagerView.stopPlay();
+                }
             }
         }
     }
@@ -304,6 +309,9 @@ public class BannerView extends RelativeLayout {
 	}
 
 
+    /**
+     * 停止轮播
+     */
     private void stopPlay(){
         if (timer!=null){
             timer.cancel();
@@ -317,6 +325,10 @@ public class BannerView extends RelativeLayout {
     }
 
 
+    /**
+     * 初始化轮播图指示器
+     * @param hintView          hintView
+     */
 	private void initHint(BaseHintView hintView){
 		if(mHintView!=null){
 			removeView(mHintView);

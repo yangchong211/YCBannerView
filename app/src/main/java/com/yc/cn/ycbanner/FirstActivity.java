@@ -20,6 +20,7 @@ import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
 
 public class FirstActivity extends AppCompatActivity {
 
+
     private int[] imgs = {
             R.drawable.bg_kites_min,
             R.drawable.bg_autumn_tree_min,
