@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.yc.cn.ycbannerlib.marquee.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         List<CharSequence> list = getMarqueeTitle();
+        //根据公告字符串列表启动轮播
         marqueeView.startWithList(list);
-        marqueeView.setOnItemClickListener(new OnItemClickListener() {
+        //设置点击事件
+        marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
             @Override
             public void onItemClick(int position, TextView textView) {
 

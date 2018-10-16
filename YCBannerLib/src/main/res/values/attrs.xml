@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="BannerView">
-        <attr name="hint_mode">         <!--轮播图红点是1，数字是2-->
+        <attr name="hint_mode">         <!--轮播图红点是0，数字是1-->
             <enum name="point" value="0" />
             <enum name="number" value="1" />
         </attr>

@@ -5,10 +5,10 @@
 
 ### 目录介绍
 - 1.功能说明
-- 2.使用说明
-- 2.5 如何显示红点，文字，自定义icon等
-- 3.图片展示
-- 4.其他介绍
+- 2.轮播图使用说明
+- 3.跑马灯使用说明
+- 4.图片展示
+- 5.其他介绍
 
 
 ### 1.功能说明
@@ -22,7 +22,7 @@
 
 
 ### 2.使用说明
-- 2.1 直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.2'
+- 2.1 直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.6'
 - 关于具体的使用方法，可以直接参考代码
 - 2.2 在布局中写，可以设置选择的属性值
 
@@ -44,17 +44,28 @@
 ```
 private void initBanner() {
     banner = (BannerView) findViewById(R.id.banner);
-    banner.setAnimationDuration(1000);
-    banner.setHintPadding(0, SizeUtil.dip2px(this,10f),
-            SizeUtil.dip2px(this,10f),SizeUtil.dip2px(this,10f));
+    //设置轮播时间
     banner.setPlayDelay(2000);
-    banner.setHintView(new TextHintView(this));
+    //设置轮播图适配器，必须
     banner.setAdapter(new ImageNormalAdapter());
+    //设置位置
+    banner.setHintGravity(1);
+    //设置指示器样式
+    banner.setHintMode(BannerView.HintMode.TEXT_HINT);
+    //判断轮播是否进行
+    boolean playing = banner.isPlaying();
+    //轮播图点击事件
     banner.setOnBannerClickListener(new OnBannerClickListener() {
         @Override
         public void onItemClick(int position) {
-            Toast.makeText(FourActivity.this,
-                    position+"被点击呢",Toast.LENGTH_SHORT).show();
+            Toast.makeText(FirstActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
+        }
+    });
+    //轮播图滑动事件
+    banner.setOnPageListener(new OnPageListener() {
+        @Override
+        public void onPageChange(int position) {
+
         }
     });
 }
@@ -88,6 +99,7 @@ private class ImageNormalAdapter extends AbsStaticPagerAdapter {
 protected void onPause() {
     super.onPause();
     if(banner!=null){
+        //停止轮播
         banner.pause();
     }
 }
@@ -96,6 +108,7 @@ protected void onPause() {
 protected void onResume() {
     super.onResume();
     if(banner!=null){
+        //开始轮播
         banner.resume();
     }
 }
@@ -108,82 +121,58 @@ protected void onResume() {
 - **b.设置自定义icon添加代码：**
 -  banner.setHintView(new IconHintView(this,R.drawable.point_focus,R.drawable.point_normal));
 -  **c.默认不添加该方法则是显示圆点**
-
-
-
-
 - 请参考代码，已经做出了很详细的注释
 
 
+### 3.跑马灯使用说明
+#### 3.1 在布局中添加代码
+```
+<!--上下滚动TextView-->
+<com.yc.cn.ycbannerlib.marquee.MarqueeView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/marqueeView"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="40dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center_vertical"
+    app:paddingStart="0dp"
+    app:mvAnimDuration="1000"
+    app:mvInterval="2000"
+    app:mvTextColor="#464C4E"
+    app:mvTextSize="16sp"
+    app:mvSingleLine="true"/>
+```
 
-## 3.图片展示
-- 3.1 轮播图截图
+#### 3.2 使用
+```
+List<CharSequence> list = getMarqueeTitle();
+//根据公告字符串列表启动轮播
+marqueeView.startWithList(list);
+//设置点击事件
+marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+    @Override
+    public void onItemClick(int position, TextView textView) {
+
+    }
+});
+```
+
+
+## 4.图片展示
+- 4.1 轮播图截图
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/1.png)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
 
 
-## 4.其他介绍
-**4.1版本更新说明**
+## 5.其他介绍
+**5.1版本更新说明**
 - v1.0 最简单的轮播图，无限轮播
 - v1.1 9月2日  添加了轮播图点击事件，添加了动态管理adapter，和静态管理adapter，模拟多种场景轮播图
 - v1.2 12月12日 添加了暂停，开始轮播的功能；如果设置轮播图控件宽高都是wrap_content，那么则默认宽是match_parent，高是200dp。修改了handler内存泄漏
-- v1.3 18年3月22日
-- 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
+- v1.3 18年3月22日 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
+- v1.3.6 18年9月15日 更新API方法说明
 
 
-**4.3其他**
--  **开源项目说明**
-> **开源综合案例合集**
->
-- **如果你感觉还行，请给一个star，如果你觉得哪里有问题，也可以直接把问题提给我，我会修改的。业余的小案例，定期更新，持续更新**
-- 代码地址：https://github.com/yangchong211/LifeHelper
-- [说明及截图](https://github.com/yangchong211/LifeHelper/blob/master/README.md)
-- 模块：新闻，音乐，视频，图片，唐诗宋词，快递，天气，记事本，阅读器等等
-- 接口：七牛，阿里云，天行，干货集中营，极速数据，追书神器等等
-- 架构：采用MVP+Rx+Retrofit+Desgin+Dagger2+阿里VLayout+腾讯X5等架构模式。
-
-
-
-
->  **开源视频播放器封装库**
->
-- **视频播放器封装库案例，仿照优酷，爱奇艺视频播放器，可以添家视频观看权限，试看模式，类似优酷试看功能。基于ijkplayer，支持网络视频或者本地视频播放，滑动调节亮度或者音量，快进快退，记录播放位置。可以设置边观看变缓存，支持全屏播放，小窗口，正常播放等模式；还支持列表播放，切换分辨率，还可以自定义视频播放器，拓展性强**
-- 代码地址：https://github.com/yangchong211/YCVideoPlayer
-- [说明及截图](https://github.com/yangchong211/YCVideoPlayer/blob/master/README.md)
-- 具体详细的开发说明文档，可以直接查看上面链接说明
-
-
-
-
->  **开源状态切换管理器封装库**
->
-- **状态切换，让View状态的切换和Activity彻底分离开。用builder模式来自由的添加需要的状态View，可以设置有数据，数据为空，加载数据错误，网络错误，加载中等多种状态，并且支持自定义状态的布局。。目前已经用于新芽正式项目中，拓展性强！！**
-- 代码地址：https://github.com/yangchong211/YCStateLayout
-- [说明及截图](https://github.com/yangchong211/YCStateLayout/blob/master/README.md)
-- 具体详细的开发说明文档，可以直接查看上面链接说明
-
-
-
->  **开源状态切换管理器封装库**
->
-- **状态切换，让View状态的切换和Activity彻底分离开。用builder模式来自由的添加需要的状态View，可以设置有数据，数据为空，加载数据错误，网络错误，加载中等多种状态，并且支持自定义状态的布局。。目前已经用于新芽正式项目中，拓展性强！！**
-- 代码地址：https://github.com/yangchong211/YCStateLayout
-- [说明及截图](https://github.com/yangchong211/YCStateLayout/blob/master/README.md)
-- 具体详细的开发说明文档，可以直接查看上面链接说明
-
-
->  **开源自定义对话框封装库**
->
-- **自定义对话框，其中包括：仿ios底部弹窗；自定义Toast；自定义DialogFragment弹窗(功能很强大)，自定义PopupWindow弹窗【采用builder模式，可以自定义位置，背景，自定义布局(支持嵌套recyclerView)等等，拓展性强】，目前已经用于新芽和投资界正式项目中。！**
-- 代码地址：https://github.com/yangchong211/YCDialog
-- [说明及截图](https://github.com/yangchong211/YCDialog/blob/master/README.md)
-- 具体详细的开发说明文档，可以直接查看上面链接说明
-
-
->  **开源复合类型封装库**
->
-- **自定义支持上拉加载更多，下拉刷新，可以自定义头部和底部，可以添加多个headAdapter，使用一个原生recyclerView就可以搞定复杂界面。支持自由切换状态【加载中，加载成功，加载失败，没网络等状态】的控件，可以自定义状态视图View。！**
-- 代码地址：https://github.com/yangchong211/YCRefreshView
-- [说明及截图](https://github.com/yangchong211/YCRefreshView/blob/master/README.md)
-- 具体详细的开发说明文档，可以直接查看上面链接说明
 

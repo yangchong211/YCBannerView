@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib;
+package com.yc.cn.ycbannerlib.banner;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
+import com.yc.cn.ycbannerlib.R;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.TextHintView;
 import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
@@ -30,8 +31,9 @@ import com.yc.cn.ycbannerlib.banner.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.Timer;
@@ -51,6 +53,18 @@ import java.util.TimerTask;
  * </pre>
  */
 public class BannerView extends RelativeLayout {
+
+
+    /**
+     * 轮播图红点是0，数字是1
+     * 后期还可以加入其他的
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface HintMode {
+        int COLOR_POINT_HINT = 0;
+        int TEXT_HINT = 1;
+    }
+
 
 	private ViewPager mViewPager;
 	private PagerAdapter mAdapter;
@@ -105,6 +119,11 @@ public class BannerView extends RelativeLayout {
 
 
     /**
+     * 练习自定义控件
+     * 组合控件，把Android现有的控件组合在一起，实现想要的效果
+     * 继承现有控件，做增强功能
+     * 继承View，完全自定义控件TextView，Button，EditText
+     * 继承ViewGroup，完全自定义控件LinearLayout，ScrollView
      * 让外界在代码中new对象时调用
      * @param context           上下文
      */
@@ -151,7 +170,7 @@ public class BannerView extends RelativeLayout {
 		paddingRight = (int) type.getDimension(R.styleable.BannerView_hint_paddingRight, 0);
 		paddingTop = (int) type.getDimension(R.styleable.BannerView_hint_paddingTop, 0);
 		paddingBottom = (int) type.getDimension(R.styleable.BannerView_hint_paddingBottom
-                , SizeUtil.dip2px(getContext(),4));
+                , dip2px(getContext(),4));
 
 		mViewPager = new ViewPager(getContext());
 		mViewPager.setId(R.id.banner_inner);
@@ -159,10 +178,10 @@ public class BannerView extends RelativeLayout {
                 , LayoutParams.MATCH_PARENT));
 		addView(mViewPager);
 		type.recycle();
-		if(hintMode==0){
+		if(hintMode==HintMode.COLOR_POINT_HINT){
             initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
                     , Color.parseColor("#88ffffff")));
-        }else if(hintMode==1){
+        }else if(hintMode==HintMode.TEXT_HINT){
             initHint(new TextHintView(getContext()));
         }else {
             initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
@@ -174,8 +193,7 @@ public class BannerView extends RelativeLayout {
 
     private void initGestureDetector() {
         //手势处理
-        mGestureDetector = new GestureDetector(getContext(),
-                new GestureDetector.SimpleOnGestureListener(){
+        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 if (mOnItemClickListener!=null){
@@ -232,7 +250,7 @@ public class BannerView extends RelativeLayout {
         if (heightMode == MeasureSpec.EXACTLY) {
             height = cHeight;
         } else {
-            height = SizeUtil.dip2px(getContext(),200f);
+            height = dip2px(getContext(),200f);
         }
         setMeasuredDimension(width, height);
     }
@@ -493,6 +511,13 @@ public class BannerView extends RelativeLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
 		mRecentTouchTime = System.currentTimeMillis();
         mGestureDetector.onTouchEvent(ev);
+        /*int action = ev.getAction();
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
+                || action == MotionEvent.ACTION_OUTSIDE) {
+            startPlay();
+        } else if (action == MotionEvent.ACTION_DOWN) {
+            stopPlay();
+        }*/
         return super.dispatchTouchEvent(ev);
     }
 
@@ -505,7 +530,7 @@ public class BannerView extends RelativeLayout {
 
 
     /**
-     * 轮播图点击事件
+     * 轮播图滑动事件
      */
     public void setOnPageListener(OnPageListener listener){
         this.mOnPageListener = listener;
@@ -546,8 +571,8 @@ public class BannerView extends RelativeLayout {
      * 设置指示器样式
      * @param mode          样式：文字/红点
      */
-    public void setHintMode(int mode){
-
+    public void setHintMode(@HintMode int mode){
+        hintMode = mode;
     }
 
 
@@ -584,6 +609,12 @@ public class BannerView extends RelativeLayout {
         if (hintView!=null){
             initHint(hintView);
         }
+    }
+
+
+    public static int dip2px(Context ctx, float dpValue) {
+        final float scale = ctx.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 

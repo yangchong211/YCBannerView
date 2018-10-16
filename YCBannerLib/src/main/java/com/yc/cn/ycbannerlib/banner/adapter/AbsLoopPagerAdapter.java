@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;
 

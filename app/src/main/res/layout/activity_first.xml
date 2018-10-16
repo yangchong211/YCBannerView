@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.yc.cn.ycbannerlib.BannerView
+    <com.yc.cn.ycbannerlib.banner.BannerView
         android:id="@+id/banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -12,12 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-
-
 import com.yc.cn.ycbannerlib.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <pre>
@@ -32,7 +28,7 @@ import java.util.List;
 public class MarqueeView extends ViewFlipper {
 
     private Context mContext;
-    private List<? extends CharSequence> notices;
+    private ArrayList<String> notices;
     private boolean isSetAnimDuration = false;
     private OnItemClickListener onItemClickListener;
 
@@ -104,7 +100,7 @@ public class MarqueeView extends ViewFlipper {
      * 根据公告字符串列表启动轮播
      * @param notices           公告集合
      */
-    public void startWithList(List<? extends CharSequence> notices) {
+    public void startWithList(ArrayList<String> notices) {
         setNotices(notices);
         start();
     }
@@ -121,7 +117,7 @@ public class MarqueeView extends ViewFlipper {
         if (dpW == 0) {
             throw new RuntimeException("Please set MarqueeView width !");
         }
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
         if (noticeLength <= limit) {
             list.add(notice);
         } else {
@@ -219,7 +215,7 @@ public class MarqueeView extends ViewFlipper {
         return (int) getCurrentView().getTag();
     }
 
-    public List<? extends CharSequence> getNotices() {
+    public ArrayList<String> getNotices() {
         return notices;
     }
 
@@ -227,7 +223,7 @@ public class MarqueeView extends ViewFlipper {
      * 设置数据集合
      * @param notices               数据
      */
-    public void setNotices(List<? extends CharSequence> notices) {
+    public void setNotices(ArrayList<String> notices) {
         this.notices = notices;
     }
 
@@ -238,15 +234,19 @@ public class MarqueeView extends ViewFlipper {
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
-
-    public int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+    public interface OnItemClickListener {
+        void onItemClick(int position, TextView textView);
     }
 
-    public int px2sp(Context context, float pxValue) {
+
+    public static int px2sp(Context context, float pxValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    public static int px2dip(Context ctx, float pxValue) {
+        final float scale = ctx.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 
 }

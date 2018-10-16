@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;

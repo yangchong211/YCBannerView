@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 
 /**
  * <pre>
@@ -32,8 +32,8 @@ public class ColorPointHintView extends ShapeHintView {
     public Drawable makeFocusDrawable() {
         GradientDrawable dotFocus = new GradientDrawable();
         dotFocus.setColor(focusColor);
-        dotFocus.setCornerRadius(SizeUtil.dip2px(getContext(), 4));
-        dotFocus.setSize(SizeUtil.dip2px(getContext(), 8), SizeUtil.dip2px(getContext(), 8));
+        dotFocus.setCornerRadius(BannerView.dip2px(getContext(), 4));
+        dotFocus.setSize(BannerView.dip2px(getContext(), 8), BannerView.dip2px(getContext(), 8));
         return dotFocus;
     }
 
@@ -41,8 +41,8 @@ public class ColorPointHintView extends ShapeHintView {
     public Drawable makeNormalDrawable() {
         GradientDrawable dotNormal = new GradientDrawable();
         dotNormal.setColor(normalColor);
-        dotNormal.setCornerRadius(SizeUtil.dip2px(getContext(), 4));
-        dotNormal.setSize(SizeUtil.dip2px(getContext(), 8), SizeUtil.dip2px(getContext(), 8));
+        dotNormal.setCornerRadius(BannerView.dip2px(getContext(), 4));
+        dotNormal.setSize(BannerView.dip2px(getContext(), 8), BannerView.dip2px(getContext(), 8));
         return dotNormal;
     }
 

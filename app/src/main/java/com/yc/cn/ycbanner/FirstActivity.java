@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
@@ -39,6 +39,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if(banner!=null){
+            //停止轮播
             banner.pause();
         }
     }
@@ -47,6 +48,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(banner!=null){
+            //开始轮播
             banner.resume();
         }
     }
@@ -61,15 +63,24 @@ public class FirstActivity extends AppCompatActivity {
 
     private void initBanner() {
         banner = (BannerView) findViewById(R.id.banner);
+        //设置轮播时间
         banner.setPlayDelay(2000);
+        //设置轮播图适配器，必须
         banner.setAdapter(new ImageNormalAdapter());
+        //设置位置
         banner.setHintGravity(1);
+        //设置指示器样式
+        banner.setHintMode(BannerView.HintMode.TEXT_HINT);
+        //判断轮播是否进行
+        boolean playing = banner.isPlaying();
+        //轮播图点击事件
         banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(FirstActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
             }
         });
+        //轮播图滑动事件
         banner.setOnPageListener(new OnPageListener() {
             @Override
             public void onPageChange(int position) {

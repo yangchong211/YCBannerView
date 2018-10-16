@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
