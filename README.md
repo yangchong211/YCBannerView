@@ -177,7 +177,7 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 
 
 #### 关于其他内容介绍
-- ![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 #### 关于博客汇总链接
