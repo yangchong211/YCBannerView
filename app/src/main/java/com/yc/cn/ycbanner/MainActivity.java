@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
+        findViewById(R.id.tv_7).setOnClickListener(this);
         marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
         initMarqueeView();
     }
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_6:
                 startActivity(new Intent(this, SixActivity.class));
                 break;
+            case R.id.tv_7:
+                startActivity(new Intent(this,SevenActivity.class));
+                break;
             default:
                 break;
         }
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (marqueeView == null) {
             return;
         }
-        List<CharSequence> list = getMarqueeTitle();
+        ArrayList<String> list = getMarqueeTitle();
         //根据公告字符串列表启动轮播
         marqueeView.startWithList(list);
         //设置点击事件
@@ -80,18 +84,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public List<CharSequence> getMarqueeTitle() {
-        List<CharSequence> list = new ArrayList<>();
+    public ArrayList<String> getMarqueeTitle() {
+        ArrayList<String> list = new ArrayList<>();
         String[] title = getResources().getStringArray(R.array.main_marquee_title);
         SpannableString ss1 = new SpannableString(title[0]);
         ss1.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss1);
+        list.add(ss1.toString());
         SpannableString ss2 = new SpannableString(title[1]);
         ss2.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[1].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss2);
+        list.add(ss2.toString());
         SpannableString ss3 = new SpannableString(title[2]);
         ss3.setSpan(new URLSpan("http://www.ximalaya.com/zhubo/71989305/"), 2, title[2].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss3);
+        list.add(ss3.toString());
         return list;
     }
 

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.
@@ -62,8 +61,7 @@ public class SecondActivity extends AppCompatActivity {
         banner = (BannerView) findViewById(R.id.banner);
         banner.setAdapter(new ImageNormalAdapter());
         banner.setHintGravity(1);
-        banner.setHintPadding(SizeUtil.dip2px(this,10),0,
-                SizeUtil.dip2px(this,10),SizeUtil.dip2px(this,10));
+        banner.setHintPadding(20,0, 20,20);
         banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {

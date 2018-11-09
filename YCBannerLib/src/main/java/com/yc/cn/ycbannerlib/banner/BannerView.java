@@ -29,9 +29,6 @@ import com.yc.cn.ycbannerlib.banner.hintview.TextHintView;
 import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 import com.yc.cn.ycbannerlib.banner.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -68,8 +65,6 @@ public class BannerView extends RelativeLayout {
 
 	private ViewPager mViewPager;
 	private PagerAdapter mAdapter;
-	private OnBannerClickListener mOnItemClickListener;
-	private OnPageListener mOnPageListener;
     private GestureDetector mGestureDetector;
 
 	private long mRecentTouchTime;
@@ -521,21 +516,6 @@ public class BannerView extends RelativeLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    /**
-     * 轮播图点击事件
-     */
-    public void setOnBannerClickListener(OnBannerClickListener listener){
-        this.mOnItemClickListener = listener;
-    }
-
-
-    /**
-     * 轮播图滑动事件
-     */
-    public void setOnPageListener(OnPageListener listener){
-        this.mOnPageListener = listener;
-    }
-
 
     /**-------------------------------------设置相关属性---------------------------------------*/
 
@@ -615,6 +595,40 @@ public class BannerView extends RelativeLayout {
     public static int dip2px(Context ctx, float dpValue) {
         final float scale = ctx.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+
+    private OnPageListener mOnPageListener;
+    public interface OnPageListener {
+        /**
+         * 滑动监听
+         * @param position          索引
+         */
+        void onPageChange(int position);
+
+    }
+    /**
+     * 轮播图滑动事件
+     */
+    public void setOnPageListener(OnPageListener listener){
+        this.mOnPageListener = listener;
+    }
+
+
+    private OnBannerClickListener mOnItemClickListener;
+    public interface OnBannerClickListener {
+        /**
+         * 点击
+         * @param position          索引
+         */
+        void onItemClick(int position);
+
+    }
+    /**
+     * 轮播图点击事件
+     */
+    public void setOnBannerClickListener(OnBannerClickListener listener){
+        this.mOnItemClickListener = listener;
     }
 
 

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.
@@ -65,7 +64,7 @@ public class ThirdActivity extends AppCompatActivity {
         banner.setHintColor(Color.GRAY);
         banner.setHintGravity(Gravity.RIGHT);
         banner.setAnimationDuration(1000);
-        banner.setHintPadding(0, SizeUtil.dip2px(this,10f),0,SizeUtil.dip2px(this,10f));
+        banner.setHintPadding(0, 20,0,20);
         banner.setPlayDelay(2000);
         banner.setAdapter(new ImageNormalAdapter(banner));
         banner.setOnBannerClickListener(new OnBannerClickListener() {

@@ -61,6 +61,7 @@
     <com.yc.cn.ycbannerlib.marquee.MarqueeView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/marqueeView"
+        android:background="@color/color_10000000"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="40dp"
@@ -73,5 +74,14 @@
         app:mvTextColor="#464C4E"
         app:mvTextSize="16sp"
         app:mvSingleLine="true"/>
+
+
+    <TextView
+        android:id="@+id/tv_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="7.recyclerView轮播滑动"/>
 
 </LinearLayout>

@@ -3,6 +3,7 @@
 - 项目地址：https://github.com/yangchong211/YCBanner
 
 
+
 ### 目录介绍
 - 1.功能说明
 - 2.轮播图使用说明
@@ -168,11 +169,39 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 
 ## 5.其他介绍
 **5.1版本更新说明**
-- v1.0 最简单的轮播图，无限轮播
-- v1.1 9月2日  添加了轮播图点击事件，添加了动态管理adapter，和静态管理adapter，模拟多种场景轮播图
-- v1.2 12月12日 添加了暂停，开始轮播的功能；如果设置轮播图控件宽高都是wrap_content，那么则默认宽是match_parent，高是200dp。修改了handler内存泄漏
-- v1.3 18年3月22日 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
-- v1.3.6 18年9月15日 更新API方法说明
+- v1.0 16年3月23日，新芽轮播图，最简单的轮播图，无限轮播。
+- v1.1 5月2日  添加了动态管理adapter，和静态管理adapter，模拟多种场景轮播图
+- v1.2 6月12日 添加了触摸轮播图时暂停，松开手指开始轮播的功能；如果设置轮播图控件宽高都是wrap_content，那么则默认宽是match_parent，高是200dp。修改了handler内存泄漏
+- v1.3 17年8月22日 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
+- v1.3.6 18年9月15日 同行提议更新API方法说明
 
 
+#### 关于其他内容介绍
+- ![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+#### 关于博客汇总链接
+- 1.[技术博客汇总](https://www.jianshu.com/p/614cb839182c)
+- 2.[开源项目汇总](https://blog.csdn.net/m0_37700275/article/details/80863574)
+- 3.[生活博客汇总](https://blog.csdn.net/m0_37700275/article/details/79832978)
+- 4.[喜马拉雅音频汇总](https://www.jianshu.com/p/f665de16d1eb)
+- 5.[其他汇总](https://www.jianshu.com/p/53017c3fc75d)
+
+
+
+
+#### 于LICENSE
+```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 

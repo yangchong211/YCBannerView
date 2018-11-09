@@ -12,7 +12,6 @@ import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.IconHintView;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 /**
  * Created by PC on 2017/11/21.
@@ -63,7 +62,7 @@ public class SixActivity extends AppCompatActivity {
         banner = (BannerView) findViewById(R.id.banner);
         banner.setAnimationDuration(1000);
         banner.setHintGravity(1);
-        banner.setHintPadding(0, SizeUtil.dip2px(this,10f),0,SizeUtil.dip2px(this,10f));
+        banner.setHintPadding(0, 20,0,20);
         banner.setPlayDelay(2000);
         banner.setHintView(new IconHintView(this,R.drawable.point_focus,R.drawable.point_normal));
         banner.setAdapter(new ImageNormalAdapter());

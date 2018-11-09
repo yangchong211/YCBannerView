@@ -13,7 +13,6 @@ import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
 
 /**
@@ -56,8 +55,7 @@ public class SplashActivity extends AppCompatActivity {
         banner.setPlayDelay(0);
         banner.setAdapter(new ImageNormalAdapter());
         banner.setHintGravity(1);
-        banner.setHintPadding(SizeUtil.dip2px(this,10),0,
-                SizeUtil.dip2px(this,10),SizeUtil.dip2px(this,30));
+        banner.setHintPadding(20,0, 20,20);
         banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
