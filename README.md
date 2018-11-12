@@ -173,6 +173,7 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 - v1.1 5月2日  添加了动态管理adapter，和静态管理adapter，模拟多种场景轮播图
 - v1.2 6月12日 添加了触摸轮播图时暂停，松开手指开始轮播的功能；如果设置轮播图控件宽高都是wrap_content，那么则默认宽是match_parent，高是200dp。修改了handler内存泄漏
 - v1.3 17年8月22日 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
+- v1.3.2 17年10月21日 添加跑马灯轮播到该lib库中
 - v1.3.6 18年9月15日 同行提议更新API方法说明
 
 
