@@ -84,4 +84,12 @@
         android:padding="10dp"
         android:text="7.recyclerView轮播滑动"/>
 
+    <TextView
+        android:id="@+id/tv_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="8.recyclerView轮播滑动封装库"/>
+
 </LinearLayout>

@@ -22,6 +22,7 @@
         <activity android:name=".SplashActivity"/>
         <activity android:name=".SixActivity"/>
         <activity android:name=".SevenActivity"/>
+        <activity android:name=".EightActivity"/>
     </application>
 
 </manifest>

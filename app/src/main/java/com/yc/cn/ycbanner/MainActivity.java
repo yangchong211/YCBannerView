@@ -2,6 +2,7 @@ package com.yc.cn.ycbanner;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
+        findViewById(R.id.tv_8).setOnClickListener(this);
         marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
         initMarqueeView();
     }
@@ -59,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_7:
                 startActivity(new Intent(this,SevenActivity.class));
+                break;
+            case R.id.tv_8:
+                startActivity(new Intent(this,EightActivity.class));
                 break;
             default:
                 break;
