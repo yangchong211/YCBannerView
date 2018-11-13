@@ -49,7 +49,7 @@ public class EightActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerView);
         recyclerView2 = findViewById(R.id.recyclerView2);
         fl_container = findViewById(R.id.fl_container);
-        //initRecyclerView();
+        initRecyclerView();
         initRecyclerView2();
     }
 
