@@ -54,7 +54,7 @@ public class EightActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        Snap2Adapter adapter = new Snap2Adapter(this);
+        Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
         mRecyclerView.setDelayTime(3000)
                 .setFlingSpeed(0)
@@ -74,23 +74,23 @@ public class EightActivity extends AppCompatActivity {
 
 
     private void initRecyclerView2() {
-//        GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
-//        manager.attach(recyclerView2,2);
-//        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
-//        recyclerView2.setLayoutManager(manager);
-
-
-
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
+        manager.attach(recyclerView2,2);
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
         recyclerView2.setLayoutManager(manager);
-        ScrollHelper2 snapHelper = new ScrollHelper2();
-        snapHelper.attachToRecyclerView(recyclerView2);
 
 
-        Snap2Adapter adapter = new Snap2Adapter(this);
-        recyclerView2.setAdapter(adapter);
+
+//        LinearLayoutManager manager = new LinearLayoutManager(this);
+//        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView2.setLayoutManager(manager);
+//        ScrollHelper2 snapHelper = new ScrollHelper2();
+//        snapHelper.attachToRecyclerView(recyclerView2);
+
+
+        Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
+        recyclerView2.setAdapter(adapter);
         //recyclerView2.scrollToPosition(adapter.getData().size()*10);
     }
 
@@ -116,7 +116,7 @@ public class EightActivity extends AppCompatActivity {
      * 设置背景高斯模糊
      */
     public void setBlurImage(boolean forceUpdate) {
-        final Snap2Adapter adapter = (Snap2Adapter) mRecyclerView.getAdapter();
+        final Snap3Adapter adapter = (Snap3Adapter) mRecyclerView.getAdapter();
         final int mCurViewPosition = mRecyclerView.getCurrentItem();
 
         boolean isSamePosAndNotUpdate = (mCurViewPosition == mLastDraPosition) && !forceUpdate;
