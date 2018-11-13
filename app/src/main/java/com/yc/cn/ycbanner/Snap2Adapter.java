@@ -2,43 +2,42 @@ package com.yc.cn.ycbanner;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yc.cn.ycbaseadapterlib.adapter.BaseAdapter;
+import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
 import com.yc.cn.ycbaseadapterlib.itemType.BaseMViewHolder;
 import com.yc.cn.ycbaseadapterlib.itemType.RecyclerArrayAdapter;
 
-public class Snap2Adapter extends RecyclerArrayAdapter<String>{
+import java.util.List;
+
+public class Snap2Adapter extends BaseAdapter<Integer> {
 
 
+    Snap2Adapter(Context context) {
+        super(context, R.layout.item_snap2);
+    }
 
 
-    public Snap2Adapter(Context context) {
-        super(context);
+    @Override
+    protected void bindData(BaseViewHolder holder, Integer data) {
+        Integer integer = getData().get(getViewPosition() % getData().size());
+        ImageView imageView = holder.getView(R.id.iv_image);
+        imageView.setBackgroundResource(integer);
     }
 
     @Override
-    public BaseMViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(parent);
-    }
-
-    private class MyViewHolder extends BaseMViewHolder<String> {
-
-        private final ImageView imageView;
-        private final TextView textView;
-
-        MyViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_snap2);
-            imageView = getView(R.id.iv_image);
-            textView = getView(R.id.tv_title);
-        }
-
-        @Override
-        public void setData(String data) {
-            super.setData(data);
-            imageView.setBackgroundResource(R.drawable.bg_kites_min);
-            textView.setText(data);
+    public int getItemCount() {
+        if (getData().size() != 1) {
+            Log.e("getItemCount","getItemCount---------");
+            return Integer.MAX_VALUE; // 无限轮播
+        } else {
+            Log.e("getItemCount","getItemCount++++----");
+            return getData().size();
         }
     }
+
 }

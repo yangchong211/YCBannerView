@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
+
 
 /**
  * Created by PC on 2017/11/21.
@@ -74,14 +73,14 @@ public class FirstActivity extends AppCompatActivity {
         //判断轮播是否进行
         boolean playing = banner.isPlaying();
         //轮播图点击事件
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(FirstActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
             }
         });
         //轮播图滑动事件
-        banner.setOnPageListener(new OnPageListener() {
+        banner.setOnPageListener(new BannerView.OnPageListener() {
             @Override
             public void onPageChange(int position) {
 

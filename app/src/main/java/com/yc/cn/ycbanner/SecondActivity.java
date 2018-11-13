@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 
 /**
  * Created by PC on 2017/11/21.
@@ -62,7 +61,7 @@ public class SecondActivity extends AppCompatActivity {
         banner.setAdapter(new ImageNormalAdapter());
         banner.setHintGravity(1);
         banner.setHintPadding(20,0, 20,20);
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(SecondActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();

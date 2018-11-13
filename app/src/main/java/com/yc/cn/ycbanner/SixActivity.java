@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.IconHintView;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 
 /**
  * Created by PC on 2017/11/21.
@@ -66,7 +65,7 @@ public class SixActivity extends AppCompatActivity {
         banner.setPlayDelay(2000);
         banner.setHintView(new IconHintView(this,R.drawable.point_focus,R.drawable.point_normal));
         banner.setAdapter(new ImageNormalAdapter());
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(SixActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();

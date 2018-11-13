@@ -11,8 +11,7 @@ import android.widget.ImageView;
 
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
-import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
+
 
 
 /**
@@ -56,13 +55,13 @@ public class SplashActivity extends AppCompatActivity {
         banner.setAdapter(new ImageNormalAdapter());
         banner.setHintGravity(1);
         banner.setHintPadding(20,0, 20,20);
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
 
             }
         });
-        banner.setOnPageListener(new OnPageListener() {
+        banner.setOnPageListener(new BannerView.OnPageListener() {
             @Override
             public void onPageChange(int position) {
                 if(position==imgs.length-1){

@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
-import com.yc.cn.ycbannerlib.banner.inter.OnBannerClickListener;
 
 /**
  * Created by PC on 2017/11/21.
@@ -67,7 +66,7 @@ public class ThirdActivity extends AppCompatActivity {
         banner.setHintPadding(0, 20,0,20);
         banner.setPlayDelay(2000);
         banner.setAdapter(new ImageNormalAdapter(banner));
-        banner.setOnBannerClickListener(new OnBannerClickListener() {
+        banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(ThirdActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();

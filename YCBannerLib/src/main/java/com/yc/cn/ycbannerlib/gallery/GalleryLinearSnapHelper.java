@@ -1,6 +1,7 @@
-package com.yc.cn.ycbanner.test;
+package com.yc.cn.ycbannerlib.gallery;
 
 import android.graphics.PointF;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.LinearSnapHelper;
@@ -9,7 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/3/18
+ *     desc  : 自定义SnapHelper
+ *     revise: 关于SnapHelper源码分析可以看我博客：https://blog.csdn.net/m0_37700275/article/details/83901677
+ * </pre>
+ */
 public class GalleryLinearSnapHelper extends LinearSnapHelper {
 
     private static final float INVALID_DISTANCE = 1f;
