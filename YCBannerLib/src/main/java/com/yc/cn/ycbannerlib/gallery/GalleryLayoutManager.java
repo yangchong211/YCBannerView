@@ -83,6 +83,7 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
         int max = Math.max(0, mCurSelectedPosition);
         //注意这个地方取值
         mCurSelectedPosition = Math.min(max, getItemCount() - 1);
+        logger("position+++++" + mCurSelectedPosition);
         detachAndScrapAttachedViews(recycler);
         firstFillCover(recycler, state, 0);
     }
@@ -689,6 +690,7 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
     }
 
     static int getPosition(){
+        logger("position-----"+mCurSelectedPosition);
         return mCurSelectedPosition;
     }
 

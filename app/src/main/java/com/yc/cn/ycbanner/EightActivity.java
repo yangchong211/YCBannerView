@@ -59,12 +59,13 @@ public class EightActivity extends AppCompatActivity {
         mRecyclerView.setDelayTime(3000)
                 .setFlingSpeed(0)
                 .setDataAdapter(adapter)
-                .setSelectedPosition(200)
+                .setSelectedPosition(100)
                 .setCallbackInFling(false)
                 .setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(RecyclerView recyclerView, View item, int position) {
                         Log.e("onItemSelected-----",position+"");
+                        //设置高斯模糊背景
                         setBlurImage(true);
                     }
                 })
@@ -75,7 +76,7 @@ public class EightActivity extends AppCompatActivity {
 
     private void initRecyclerView2() {
         GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
-        manager.attach(recyclerView2,2);
+        manager.attach(recyclerView2,100);
         manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
         recyclerView2.setLayoutManager(manager);
 

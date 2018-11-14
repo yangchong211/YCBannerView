@@ -6,10 +6,11 @@
 
 ### 目录介绍
 - 1.功能说明
-- 2.轮播图使用说明
+- 2.ViewPager轮播图使用说明
 - 3.跑马灯使用说明
-- 4.图片展示
-- 5.其他介绍
+- 4.RecyclerView轮播图
+- 5.图片展示
+- 6.其他介绍
 
 
 ### 1.功能说明
@@ -20,11 +21,12 @@
 - 1.5 优化：在页面onPause中调用停止轮播，在页面onResume中调用开始轮播
 - 1.6 支持监听item点击事件，支持轮播图中ViewPager的滑动监听事件
 - 1.7 不仅支持轮播图，还支持引导页面，十分方便
+- 1.8 后期增加使用recyclerView设置轮播图。已经封装到GalleryRecyclerView中，链式调用十分方便
+- 1.9 GalleryRecyclerView轮播图支持设置轮播间隔时间，设置滑动速度，设置缩放比例因子
+- 如何引用：直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.7'
 
-
-### 2.使用说明
-- 2.1 直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.6'
-- 关于具体的使用方法，可以直接参考代码
+### 2.ViewPager轮播图使用说明
+- 2.1 关于具体的使用方法，可以直接参考代码
 - 2.2 在布局中写，可以设置选择的属性值
 
 ```
@@ -160,14 +162,67 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 });
 ```
 
+### 4.RecyclerView轮播图
+#### 4.1 RecyclerView轮播图简单使用
+- 在布局中
+```
+<com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+    android:layout_marginTop="35dp"
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"/>
+```
+- 代码设置
+```
+private void initRecyclerView() {
+    Snap3Adapter adapter = new Snap3Adapter(this);
+    adapter.setData(getData());
+    mGalleryRecyclerView.setDelayTime(3000)
+            .setFlingSpeed(0)
+            .setDataAdapter(adapter)
+            .setSelectedPosition(100)
+            .setCallbackInFling(false)
+            .setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(RecyclerView recyclerView, View item, int position) {
+                    Log.e("onItemSelected-----",position+"");
+                    //设置高斯模糊背景
+                    setBlurImage(true);
+                }
+            })
+            .setSize(adapter.getData().size())
+            .setUp();
+}
+```
+- 注意要点：recyclerView轮播要是无限轮播，必须设置两点，很关键。
+    - 第一处是getItemCount() 返回的是Integer.MAX_VALUE。这是因为广告轮播图是无限轮播，getItemCount()返回的是Adapter中的总项目数，这样才能使RecyclerView能一直滚动。
+    - 第二处是onBindViewHolder()中的 position%list.size() ，表示position对图片列表list取余，这样list.get(position%list.size())才能按顺序循环展示图片。
+#### 4.2 RecyclerView实现平滑滚动，图片剧中效果
+- 如果不想设置轮播图，只想滚动。则可以直接套用GalleryLayoutManager
+    - 类似猫眼的电影选择控件
+```
+GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
+manager.attach(recyclerView,100);
+//如果想缩放，可以直接设置缩放比例因子即可
+manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
+recyclerView.setLayoutManager(manager);
+Snap3Adapter adapter = new Snap3Adapter(this);
+adapter.setData(getData());
+recyclerView.setAdapter(adapter);
+```
 
-## 4.图片展示
+
+
+### 5.图片展示
 - 4.1 轮播图截图
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/1.png)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/3.jpg)
+- <video id="video" controls="" preload="none" poster="">
+<source id="mp4" src="https://github.com/yangchong211/YCBanner/blob/master/image/4.mp4" type="video/mp4"> </video>
+  
 
-
-## 5.其他介绍
+### 6.其他介绍
 **5.1版本更新说明**
 - v1.0 16年3月23日，新芽轮播图，最简单的轮播图，无限轮播。
 - v1.1 5月2日  添加了动态管理adapter，和静态管理adapter，模拟多种场景轮播图
@@ -175,6 +230,7 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 - v1.3 17年8月22日 添加了ViewPager滑动监听接口，可以作用于引导页，十分简单
 - v1.3.2 17年10月21日 添加跑马灯轮播到该lib库中
 - v1.3.6 18年9月15日 同行提议更新API方法说明
+- v1.3.7 18年4月到6月17日   抽取项目中代码增加了recyclerView轮播图
 
 
 #### 关于其他内容介绍

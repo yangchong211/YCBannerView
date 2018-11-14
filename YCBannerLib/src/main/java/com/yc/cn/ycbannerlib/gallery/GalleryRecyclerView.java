@@ -50,7 +50,7 @@ public class GalleryRecyclerView extends RecyclerView {
     private int mFlingSpeed = 1000;
     private RecyclerView.Adapter adapter;
     private boolean mCallbackInFling = false;
-    private int mSelectedPosition;
+    private static int mSelectedPosition;
     private LinearSnapHelper mSnapHelper;
 
 
@@ -163,11 +163,9 @@ public class GalleryRecyclerView extends RecyclerView {
             if (recyclerView!=null){
                 //Log.e("handleMessage----",curSelectedPosition+"");
                 //如果cur大于或等于轮播图数量，那么播放到最后一张后时，接着轮播便是索引为0的图片
-                int cur = GalleryLayoutManager.getPosition()+1;
-                Log.e("handleMessage----------",cur+"---" + recyclerView.size);
-                if (cur<0 || cur>=recyclerView.size){
-                    cur=0;
-                }
+                //int cur = GalleryLayoutManager.getPosition()+1;
+                int cur = mSelectedPosition++;
+                //Log.e("handleMessage----------",cur+"---" + recyclerView.size);
                 Log.e("handleMessage----",cur+"");
                 recyclerView.smoothScrollToPosition(cur);
                 //假如说轮播图只有一张，那么就停止轮播
@@ -255,7 +253,7 @@ public class GalleryRecyclerView extends RecyclerView {
     }
 
     public GalleryRecyclerView setSelectedPosition(int position){
-        this.mSelectedPosition = position;
+        mSelectedPosition = position;
         return this;
     }
 
