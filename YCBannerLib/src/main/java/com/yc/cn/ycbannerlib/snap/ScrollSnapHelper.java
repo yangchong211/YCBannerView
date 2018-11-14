@@ -1,4 +1,4 @@
-package com.yc.cn.ycbanner;
+package com.yc.cn.ycbannerlib.snap;
 
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
@@ -11,7 +11,17 @@ import android.support.v7.widget.SnapHelper;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-public class ScrollHelper2 extends SnapHelper {
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/3/18
+ *     desc  : 自定义SnapHelper
+ *     revise: 关于SnapHelper源码分析可以看我博客：https://blog.csdn.net/m0_37700275/article/details/83901677
+ * </pre>
+ */
+public class ScrollSnapHelper extends SnapHelper {
 
     private static final float INVALID_DISTANCE = 1f;
     private static final float MILLISECONDS_PER_INCH = 40f;
@@ -49,11 +59,15 @@ public class ScrollHelper2 extends SnapHelper {
             @Override
             protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
                 int[] snapDistances = calculateDistanceToFinalSnap(mRecyclerView.getLayoutManager(), targetView);
-                final int dx = snapDistances[0];
-                final int dy = snapDistances[1];
-                final int time = calculateTimeForDeceleration(Math.max(Math.abs(dx), Math.abs(dy)));
-                if (time > 0) {
-                    action.update(dx, dy, time, mDecelerateInterpolator);
+                final int dx;
+                final int dy;
+                if (snapDistances != null) {
+                    dx = snapDistances[0];
+                    dy = snapDistances[1];
+                    final int time = calculateTimeForDeceleration(Math.max(Math.abs(dx), Math.abs(dy)));
+                    if (time > 0) {
+                        action.update(dx, dy, time, mDecelerateInterpolator);
+                    }
                 }
             }
 
@@ -69,27 +83,20 @@ public class ScrollHelper2 extends SnapHelper {
         if (!(layoutManager instanceof RecyclerView.SmoothScroller.ScrollVectorProvider)) {
             return RecyclerView.NO_POSITION;
         }
-
         final int itemCount = layoutManager.getItemCount();
         if (itemCount == 0) {
             return RecyclerView.NO_POSITION;
         }
-
         final View currentView = findSnapView(layoutManager);
         if (currentView == null) {
             return RecyclerView.NO_POSITION;
         }
-
         final int currentPosition = layoutManager.getPosition(currentView);
         if (currentPosition == RecyclerView.NO_POSITION) {
             return RecyclerView.NO_POSITION;
         }
-
         RecyclerView.SmoothScroller.ScrollVectorProvider vectorProvider =
                 (RecyclerView.SmoothScroller.ScrollVectorProvider) layoutManager;
-        // deltaJumps sign comes from the velocity which may not match the order of children in
-        // the LayoutManager. To overcome this, we ask for a vector from the LayoutManager to
-        // get the direction.
         PointF vectorForEnd = vectorProvider.computeScrollVectorForPosition(itemCount - 1);
         if (vectorForEnd == null) {
             // cannot get a vector for the given position.
@@ -101,23 +108,19 @@ public class ScrollHelper2 extends SnapHelper {
 
         int hDeltaJump;
         if (layoutManager.canScrollHorizontally()) {
-            hDeltaJump = estimateNextPositionDiffForFling(layoutManager,
-                    getHorizontalHelper(layoutManager), velocityX, 0);
-
+            hDeltaJump = estimateNextPositionDiffForFling(layoutManager, getHorizontalHelper(layoutManager), velocityX, 0);
             if (hDeltaJump > deltaThreshold) {
                 hDeltaJump = deltaThreshold;
             }
             if (hDeltaJump < -deltaThreshold) {
                 hDeltaJump = -deltaThreshold;
             }
-
             if (vectorForEnd.x < 0) {
                 hDeltaJump = -hDeltaJump;
             }
         } else {
             hDeltaJump = 0;
         }
-
         if (hDeltaJump == 0) {
             return RecyclerView.NO_POSITION;
         }
@@ -144,11 +147,9 @@ public class ScrollHelper2 extends SnapHelper {
             if (firstChildPosition == RecyclerView.NO_POSITION) {
                 return null;
             }
-
             if (((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition() == layoutManager.getItemCount() - 1) {
                 return null;
             }
-
             View firstChildView = layoutManager.findViewByPosition(firstChildPosition);
             if (helper.getDecoratedEnd(firstChildView) >= helper.getDecoratedMeasurement(firstChildView) / 2 && helper.getDecoratedEnd(firstChildView) > 0) {
                 return firstChildView;
@@ -161,8 +162,7 @@ public class ScrollHelper2 extends SnapHelper {
     }
 
 
-    private int estimateNextPositionDiffForFling(RecyclerView.LayoutManager layoutManager,
-                                                 OrientationHelper helper, int velocityX, int velocityY) {
+    private int estimateNextPositionDiffForFling(RecyclerView.LayoutManager layoutManager, OrientationHelper helper, int velocityX, int velocityY) {
         int[] distances = calculateScrollDistance(velocityX, velocityY);
         float distancePerChild = computeDistancePerChild(layoutManager, helper);
         if (distancePerChild <= 0) {
@@ -176,8 +176,7 @@ public class ScrollHelper2 extends SnapHelper {
         }
     }
 
-    private float computeDistancePerChild(RecyclerView.LayoutManager layoutManager,
-                                          OrientationHelper helper) {
+    private float computeDistancePerChild(RecyclerView.LayoutManager layoutManager, OrientationHelper helper) {
         View minPosView = null;
         View maxPosView = null;
         int minPos = Integer.MAX_VALUE;
@@ -186,7 +185,6 @@ public class ScrollHelper2 extends SnapHelper {
         if (childCount == 0) {
             return INVALID_DISTANCE;
         }
-
         for (int i = 0; i < childCount; i++) {
             View child = layoutManager.getChildAt(i);
             final int pos = layoutManager.getPosition(child);
@@ -205,10 +203,8 @@ public class ScrollHelper2 extends SnapHelper {
         if (minPosView == null || maxPosView == null) {
             return INVALID_DISTANCE;
         }
-        int start = Math.min(helper.getDecoratedStart(minPosView),
-                helper.getDecoratedStart(maxPosView));
-        int end = Math.max(helper.getDecoratedEnd(minPosView),
-                helper.getDecoratedEnd(maxPosView));
+        int start = Math.min(helper.getDecoratedStart(minPosView), helper.getDecoratedStart(maxPosView));
+        int end = Math.max(helper.getDecoratedEnd(minPosView), helper.getDecoratedEnd(maxPosView));
         int distance = end - start;
         if (distance == 0) {
             return INVALID_DISTANCE;

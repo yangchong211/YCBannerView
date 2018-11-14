@@ -23,7 +23,7 @@ dependencies {
     compile  'com.android.support:appcompat-v7:27.1.1'
     compile 'com.android.support:design:27.1.1'
 //    compile  project(':YCBannerLib')
-    compile 'cn.yc:YCBannerLib:1.3.7'             //轮播图
+    compile 'cn.yc:YCBannerLib:1.3.8'             //轮播图
     compile  'cn.yc:YCStatusBarLib:1.4.0'
     compile  'cn.yc:YCBaseAdapterLib:1.3.4'
     compile 'cn.yc:YCUtilsLib:1.6.2'

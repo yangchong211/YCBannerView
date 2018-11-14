@@ -1,4 +1,4 @@
-package com.yc.cn.ycbanner;
+package com.yc.cn.ycbannerlib.snap;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-public class ScrollHelper extends LinearSnapHelper {
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/3/18
+ *     desc  : 自定义SnapHelper，设置左对齐，滑动时候会滑动多个item
+ *     revise: 关于SnapHelper源码分析可以看我博客：https://blog.csdn.net/m0_37700275/article/details/83901677
+ * </pre>
+ */
+public class ScrollLinearHelper extends LinearSnapHelper {
 
     private OrientationHelper mHorizontalHelper, mVerticalHelper;
     private RecyclerView mRecyclerView;

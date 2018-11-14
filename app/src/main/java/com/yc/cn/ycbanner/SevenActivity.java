@@ -5,8 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+
+import com.yc.cn.ycbannerlib.snap.ScrollLinearHelper;
+import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
+import com.yc.cn.ycbannerlib.snap.ScrollSnapHelper;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,7 @@ public class SevenActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(manager);
-        ScrollHelper snapHelper = new ScrollHelper();
+        ScrollLinearHelper snapHelper = new ScrollLinearHelper();
         snapHelper.attachToRecyclerView(mRecyclerView);
         SnapAdapter adapter = new SnapAdapter(this);
         mRecyclerView.setAdapter(adapter);
@@ -60,7 +64,7 @@ public class SevenActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView3.setLayoutManager(manager);
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        ScrollPageHelper snapHelper = new ScrollPageHelper(Gravity.START,false);
         snapHelper.attachToRecyclerView(mRecyclerView3);
         SnapAdapter adapter = new SnapAdapter(this);
         mRecyclerView3.setAdapter(adapter);
@@ -72,7 +76,7 @@ public class SevenActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView4.setLayoutManager(manager);
-        ScrollHelper2 snapHelper = new ScrollHelper2();
+        ScrollSnapHelper snapHelper = new ScrollSnapHelper();
         snapHelper.attachToRecyclerView(mRecyclerView4);
         SnapAdapter adapter = new SnapAdapter(this);
         mRecyclerView4.setAdapter(adapter);

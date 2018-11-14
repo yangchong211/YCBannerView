@@ -23,7 +23,8 @@
 - 1.7 不仅支持轮播图，还支持引导页面，十分方便
 - 1.8 后期增加使用recyclerView设置轮播图。已经封装到GalleryRecyclerView中，链式调用十分方便
 - 1.9 GalleryRecyclerView轮播图支持设置轮播间隔时间，设置滑动速度，设置缩放比例因子
-- 如何引用：直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.7'
+- 如何引用：直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.8'
+
 
 ### 2.ViewPager轮播图使用说明
 - 2.1 关于具体的使用方法，可以直接参考代码
@@ -211,6 +212,10 @@ adapter.setData(getData());
 recyclerView.setAdapter(adapter);
 ```
 
+#### 4.3 关于自定义SnapHelper类
+- 有的时候原生LinearSnapHelper或者PagerSnapHelper无法满足我的需求，比如要设置滑动卡片左边对齐，或者右边对齐，或者居中模式；如果想要修改一下速率，或者一次滑动只能滑动一个item，那么就需要自定义呢
+- 具体实现可以看我的项目demo，看看下面的效果图
+- 关于SnapHelper类源码深度解析，可以看我的这篇博客：https://www.jianshu.com/p/9b8e0696802d
 
 
 ### 5.图片展示
@@ -219,6 +224,7 @@ recyclerView.setAdapter(adapter);
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/4.jpg)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/5.jpg)
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/6.jpg)
 - <video id="video" controls="" preload="none" poster="">
 <source id="mp4" src="https://github.com/yangchong211/YCBanner/blob/master/image/4.mp4" type="video/mp4"> </video>
 - <iframe width="560" height="315" src="https://github.com/yangchong211/YCBanner/blob/master/image/4.mp4" frameborder="0" allowfullscreen></iframe>
