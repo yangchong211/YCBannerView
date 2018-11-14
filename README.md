@@ -217,10 +217,11 @@ recyclerView.setAdapter(adapter);
 - 4.1 轮播图截图
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/1.png)
 - ![image](https://github.com/yangchong211/YCBanner/blob/master/image/2.png)
-- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/3.jpg)
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/4.jpg)
+- ![image](https://github.com/yangchong211/YCBanner/blob/master/image/5.jpg)
 - <video id="video" controls="" preload="none" poster="">
 <source id="mp4" src="https://github.com/yangchong211/YCBanner/blob/master/image/4.mp4" type="video/mp4"> </video>
-  
+- <iframe width="560" height="315" src="https://github.com/yangchong211/YCBanner/blob/master/image/4.mp4" frameborder="0" allowfullscreen></iframe>
 
 ### 6.其他介绍
 **5.1版本更新说明**
