@@ -11,19 +11,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Snap3Adapter  extends RecyclerView.Adapter <Snap3Adapter.MyViewHolder>{
 
 
     private Context mContext;
-
-
-    public Snap3Adapter(Context context){
+    Snap3Adapter(Context context){
         this.mContext =context;
     }
 
-    private List<Integer> urlList;
+    private List<Integer> urlList = new ArrayList<>();
     public void setData(List<Integer> list) {
         urlList.clear();
         this.urlList = list;

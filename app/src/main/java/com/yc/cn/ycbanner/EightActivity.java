@@ -59,7 +59,7 @@ public class EightActivity extends AppCompatActivity {
         mRecyclerView.setDelayTime(3000)
                 .setFlingSpeed(0)
                 .setDataAdapter(adapter)
-                .setSelectedPosition(2)
+                .setSelectedPosition(200)
                 .setCallbackInFling(false)
                 .setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
                     @Override
@@ -128,7 +128,7 @@ public class EightActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // 获取当前位置的图片资源ID
-                int resourceId = adapter.getData().get(mCurViewPosition);
+                int resourceId = adapter.getData().get(mCurViewPosition%adapter.getData().size());
                 // 将该资源图片转为Bitmap
                 Bitmap resBmp = BitmapFactory.decodeResource(getResources(), resourceId);
                 // 将该Bitmap高斯模糊后返回到resBlurBmp
