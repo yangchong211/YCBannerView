@@ -24,7 +24,7 @@
 - 1.7 不仅支持轮播图，还支持引导页面，十分方便
 - 1.8 后期增加使用recyclerView设置轮播图。已经封装到GalleryRecyclerView中，链式调用十分方便
 - 1.9 GalleryRecyclerView轮播图支持设置轮播间隔时间，设置滑动速度，设置缩放比例因子
-- 如何引用：直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.8'
+- 如何引用：直接在项目build文件中添加库即可：compile 'cn.yc:YCBannerLib:1.3.9'
 
 
 #### 1.2 该库的优势
