@@ -10,15 +10,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
-
 import com.ns.yc.ycutilslib.blurView.blur.CustomBlur;
 import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
+import com.yc.cn.ycbannerlib.gallery.GalleryLinearSnapHelper;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
 
@@ -28,35 +27,16 @@ import java.util.Map;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
-public class EightActivity extends AppCompatActivity {
+public class NightActivity extends AppCompatActivity {
 
     private GalleryRecyclerView mRecyclerView;
-    private RecyclerView recyclerView2;
     private ArrayList<Integer> data = new ArrayList<>();
     private FrameLayout fl_container;
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mRecyclerView!=null){
-            mRecyclerView.release();
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mRecyclerView!=null){
-            mRecyclerView.onStart();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mRecyclerView!=null){
-            mRecyclerView.onStop();
-        }
+        mRecyclerView.release();
     }
 
     @Override
@@ -65,52 +45,32 @@ public class EightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_eight);
         StateAppBar.translucentStatusBar(this,true);
         mRecyclerView = findViewById(R.id.recyclerView);
-        recyclerView2 = findViewById(R.id.recyclerView2);
         fl_container = findViewById(R.id.fl_container);
         initRecyclerView();
-        initRecyclerView2();
     }
 
     private void initRecyclerView() {
         Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
-        mRecyclerView.setDelayTime(3000)
-                .setFlingSpeed(0)
-                .setDataAdapter(adapter)
-                .setSelectedPosition(100)
-                .setCallbackInFling(false)
-                .setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(RecyclerView recyclerView, View item, int position) {
-                        Log.e("onItemSelected-----",position+"");
-                        //设置高斯模糊背景
-                        setBlurImage(true);
-                    }
-                })
-                .setSize(adapter.getData().size())
-                .setUp();
-    }
-
-
-    private void initRecyclerView2() {
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setFlingSpeed(0);
+        mRecyclerView.setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(RecyclerView recyclerView, View item, int position) {
+                Log.e("onItemSelected-----", position + "");
+                //设置高斯模糊背景
+                setBlurImage(true);
+            }
+        });
         GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
-        manager.attach(recyclerView2,100);
+        //attach，绑定recyclerView，并且设置默认选中索引的位置
+        manager.attach(100);
+        //设置缩放比例因子，在0到1.0之间即可
         manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
-        recyclerView2.setLayoutManager(manager);
-
-
-
-//        LinearLayoutManager manager = new LinearLayoutManager(this);
-//        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        recyclerView2.setLayoutManager(manager);
-//        ScrollHelper2 snapHelper = new ScrollHelper2();
-//        snapHelper.attachToRecyclerView(recyclerView2);
-
-
-        Snap3Adapter adapter = new Snap3Adapter(this);
-        adapter.setData(getData());
-        recyclerView2.setAdapter(adapter);
-        //recyclerView2.scrollToPosition(adapter.getData().size()*10);
+        mRecyclerView.setLayoutManager(manager);
+        GalleryLinearSnapHelper mSnapHelper = new GalleryLinearSnapHelper(mRecyclerView);
+        mSnapHelper.attachToRecyclerView(mRecyclerView);
+        mRecyclerView.onStart();
     }
 
 

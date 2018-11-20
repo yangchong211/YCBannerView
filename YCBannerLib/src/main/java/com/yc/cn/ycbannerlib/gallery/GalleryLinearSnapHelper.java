@@ -26,7 +26,7 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
     private RecyclerView mRecyclerView;
     private OrientationHelper mHorizontalHelper;
 
-    GalleryLinearSnapHelper(@Nullable RecyclerView recyclerView){
+    public GalleryLinearSnapHelper(@Nullable RecyclerView recyclerView){
         mRecyclerView = recyclerView;
     }
 

@@ -17,20 +17,13 @@
     </FrameLayout>
 
 
-    <TextView
-        android:id="@+id/tv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="点击轮播"/>
-
-
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="30dp"
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
+
+
 
 
 </LinearLayout>

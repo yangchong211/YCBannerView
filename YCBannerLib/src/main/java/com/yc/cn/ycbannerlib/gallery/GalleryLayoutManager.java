@@ -41,7 +41,7 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
         mOrientation = orientation;
     }
 
-    void attach(int selectedPosition) {
+    public void attach(int selectedPosition) {
         mCurSelectedPosition = Math.max(0, selectedPosition);
     }
 
@@ -94,10 +94,12 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
         return mOrientation == HORIZONTAL;
     }
 
+
     @Override
     public boolean canScrollVertically() {
         return mOrientation == VERTICAL;
     }
+
 
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {

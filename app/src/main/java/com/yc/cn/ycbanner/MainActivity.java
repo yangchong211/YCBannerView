@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
+        findViewById(R.id.tv_9).setOnClickListener(this);
         marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
         initMarqueeView();
     }
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_8:
                 startActivity(new Intent(this,EightActivity.class));
+                break;
+            case R.id.tv_9:
+                startActivity(new Intent(this,NightActivity.class));
                 break;
             default:
                 break;

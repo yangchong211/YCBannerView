@@ -133,6 +133,28 @@ public class GalleryRecyclerView extends RecyclerView {
         }
     }
 
+    /**
+     * 停止轮播
+     * 在onPause中调用
+     */
+    public void onStop(){
+        stopPlay();
+    }
+
+    /**
+     * 开始轮播
+     * 在onResume中调用
+     */
+    public void onStart(){
+        startPlay();
+    }
+
+    /**
+     * 判断轮播是否进行
+     */
+    public boolean isPlaying(){
+        return timer!=null;
+    }
 
     public void release(){
         stopPlay();
@@ -165,8 +187,9 @@ public class GalleryRecyclerView extends RecyclerView {
                 //如果cur大于或等于轮播图数量，那么播放到最后一张后时，接着轮播便是索引为0的图片
                 //int cur = GalleryLayoutManager.getPosition()+1;
                 int cur = mSelectedPosition++;
+                int currentItem = recyclerView.getCurrentItem();
                 //Log.e("handleMessage----------",cur+"---" + recyclerView.size);
-                Log.e("handleMessage----",cur+"");
+                Log.e("handleMessage----",cur+""+"----"+currentItem);
                 recyclerView.smoothScrollToPosition(cur);
                 //假如说轮播图只有一张，那么就停止轮播
                 if (recyclerView.size<=1){
@@ -209,6 +232,8 @@ public class GalleryRecyclerView extends RecyclerView {
                 || action == MotionEvent.ACTION_OUTSIDE) {
             startPlay();
         } else if (action == MotionEvent.ACTION_DOWN) {
+            mSelectedPosition = getCurrentItem()+2;
+            Log.e("handleMessage----","----"+mSelectedPosition);
             stopPlay();
         }
         return super.dispatchTouchEvent(ev);
@@ -290,10 +315,14 @@ public class GalleryRecyclerView extends RecyclerView {
 
     public int getCurrentItem() {
         RecyclerView.LayoutManager layoutManager = this.getLayoutManager();
-        View snapView = mSnapHelper.findSnapView(layoutManager);
-        if (snapView != null) {
-            return layoutManager.getPosition(snapView);
-        } else {
+        if (mSnapHelper!=null){
+            View snapView = mSnapHelper.findSnapView(layoutManager);
+            if (snapView != null) {
+                return layoutManager.getPosition(snapView);
+            } else {
+                return mSelectedPosition;
+            }
+        }else {
             return mSelectedPosition;
         }
     }
