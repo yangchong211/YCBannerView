@@ -1,5 +1,7 @@
 package com.yc.cn.ycbanner;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -86,7 +88,9 @@ public class ThirdActivity extends AppCompatActivity {
             ImageView view = new ImageView(container.getContext());
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            view.setImageResource(imgs[position]);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs[position]);
+            Bitmap bitmap1 = ImageBitmapUtils.compressByQuality1(bitmap, 10240,false);
+            view.setImageBitmap(bitmap1);
             return view;
         }
 

@@ -1,5 +1,7 @@
 package com.yc.cn.ycbanner;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -82,7 +84,9 @@ public class FourActivity extends AppCompatActivity {
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
-            view.setImageResource(imgs[position]);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs[position]);
+            Bitmap bitmap1 = ImageBitmapUtils.compressByScale(bitmap,2,2,false);
+            view.setImageBitmap(bitmap1);
             return view;
         }
 

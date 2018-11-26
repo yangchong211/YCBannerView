@@ -1,14 +1,19 @@
 package com.yc.cn.ycbanner;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Looper;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -37,6 +42,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_9).setOnClickListener(this);
         marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
         initMarqueeView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            initBitmap();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void initBitmap() {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        // 图片复用，这个属性必须设置；
+        options.inMutable = true;
+        // 手动设置缩放比例，使其取整数，方便计算、观察数据；
+        options.inDensity = 320;
+        options.inTargetDensity = 320;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_autumn_tree_min, options);
+        // 对象内存地址；
+        Log.i("ycBitmap", "bitmap = " + bitmap);
+        Log.i("ycBitmap", "ByteCount = " + bitmap.getByteCount() + ":::bitmap：AllocationByteCount = " + bitmap.getAllocationByteCount());
+        // 使用inBitmap属性，这个属性必须设置；
+        options.inBitmap = bitmap; options.inDensity = 320;
+        // 设置缩放宽高为原始宽高一半；
+        options.inTargetDensity = 160;
+        options.inMutable = true;
+        Bitmap bitmapReuse = BitmapFactory.decodeResource(getResources(), R.drawable.bg_kites_min, options);
+        // 复用对象的内存地址；
+        Log.i("ycBitmap", "bitmapReuse = " + bitmapReuse);
+        Log.i("ycBitmap", "bitmap：ByteCount = " + bitmap.getByteCount() + ":::bitmap：AllocationByteCount = " + bitmap.getAllocationByteCount());
+        Log.i("ycBitmap", "bitmapReuse：ByteCount = " + bitmapReuse.getByteCount() + ":::bitmapReuse：AllocationByteCount = " + bitmapReuse.getAllocationByteCount());
+
+        //11-26 18:24:07.971 15470-15470/com.yc.cn.ycbanner I/ycBitmap: bitmap = android.graphics.Bitmap@9739bff
+        //11-26 18:24:07.972 15470-15470/com.yc.cn.ycbanner I/ycBitmap: bitmap：ByteCount = 4346880:::bitmap：AllocationByteCount = 4346880
+        //11-26 18:24:07.994 15470-15470/com.yc.cn.ycbanner I/ycBitmap: bitmapReuse = android.graphics.Bitmap@9739bff
+        //11-26 18:24:07.994 15470-15470/com.yc.cn.ycbanner I/ycBitmap: bitmap：ByteCount = 1228800:::bitmap：AllocationByteCount = 4346880
+        //11-26 18:24:07.994 15470-15470/com.yc.cn.ycbanner I/ycBitmap: bitmapReuse：ByteCount = 1228800:::bitmapReuse：AllocationByteCount = 4346880
     }
 
     @Override

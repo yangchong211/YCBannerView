@@ -2,6 +2,8 @@ package com.yc.cn.ycbanner;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,6 +46,10 @@ public class Snap3Adapter  extends RecyclerView.Adapter <Snap3Adapter.MyViewHold
         if (urlList == null || urlList.isEmpty())
             return;
         Integer url = urlList.get(position%urlList.size());
+//        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), url);
+//        Bitmap bitmap1 = ImageBitmapUtils.compressByQuality(bitmap, 60,false);
+//        holder.imageView.setImageBitmap(bitmap1);
+
         holder.imageView.setBackgroundResource(url);
     }
 
