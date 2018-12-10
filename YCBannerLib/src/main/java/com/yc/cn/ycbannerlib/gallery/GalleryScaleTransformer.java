@@ -2,6 +2,7 @@ package com.yc.cn.ycbannerlib.gallery;
 
 
 import android.support.annotation.FloatRange;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -17,8 +18,10 @@ public class GalleryScaleTransformer implements GalleryLayoutManager.ItemTransfo
 
     //设置缩放比例因子
     private float scaleDivisor = 0.2f;
-    public GalleryScaleTransformer(@FloatRange(from = 0.0f, to = 1.0f) float scaleSize) {
+    private int padding = 30;
+    public GalleryScaleTransformer(@FloatRange(from = 0.0f, to = 1.0f) float scaleSize , int padding) {
         this.scaleDivisor = scaleSize;
+        this.padding = padding;
     }
 
     @Override
@@ -26,7 +29,12 @@ public class GalleryScaleTransformer implements GalleryLayoutManager.ItemTransfo
         item.setPivotX(item.getWidth() / 2.0f);
         item.setPivotY(item.getHeight()/ 2.0f);
         if (scaleDivisor==0.0f){
-            item.setPadding(30,0,30,0);
+            int measuredWidth = item.getMeasuredWidth();
+            //Log.d("GalleryScaleTransformer",measuredWidth+"");
+            if (padding<0 || padding>measuredWidth){
+                padding = 30;
+            }
+            item.setPadding(padding,0,padding,0);
         }else {
             float scale = 1 - scaleDivisor * Math.abs(fraction);
             //可以在这里对view设置动画效果

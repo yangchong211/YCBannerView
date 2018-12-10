@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -47,12 +46,12 @@ public class GalleryRecyclerView extends RecyclerView {
     /**
      * 滑动速度
      */
-    private int mFlingSpeed = 1000;
+    private int mFlingSpeed = FLING_MAX_VELOCITY;
     private RecyclerView.Adapter adapter;
     private boolean mCallbackInFling = false;
     private static int mSelectedPosition;
-    private LinearSnapHelper mSnapHelper;
-
+    private GalleryLinearSnapHelper mSnapHelper;
+    private static final int FLING_MAX_VELOCITY = 8000; // 最大顺时滑动速度
 
     public GalleryRecyclerView(Context context) {
         this(context,null);
@@ -242,8 +241,9 @@ public class GalleryRecyclerView extends RecyclerView {
 
     /**
      * 设置滑动速度（像素/s）
+     * 建议设置8000到15000之间，不要设置太小。
      */
-    public GalleryRecyclerView setFlingSpeed(@IntRange(from = 0) int speed) {
+    public GalleryRecyclerView setFlingSpeed(int speed) {
         this.mFlingSpeed = speed;
         return this;
     }
@@ -301,11 +301,11 @@ public class GalleryRecyclerView extends RecyclerView {
         if (getAdapter().getItemCount() <= 0) {
             return;
         }
-        GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
+        GalleryLayoutManager manager = new GalleryLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL);
         //attach，绑定recyclerView，并且设置默认选中索引的位置
         manager.attach(mSelectedPosition);
         //设置缩放比例因子，在0到1.0之间即可
-        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f,30));
         setLayoutManager(manager);
         mSnapHelper = new GalleryLinearSnapHelper(this);
         mSnapHelper.attachToRecyclerView(this);

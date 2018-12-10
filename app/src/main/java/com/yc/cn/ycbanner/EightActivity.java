@@ -75,7 +75,7 @@ public class EightActivity extends AppCompatActivity {
         Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
         mRecyclerView.setDelayTime(3000)
-                .setFlingSpeed(0)
+                .setFlingSpeed(10000)
                 .setDataAdapter(adapter)
                 .setSelectedPosition(100)
                 .setCallbackInFling(false)
@@ -93,24 +93,13 @@ public class EightActivity extends AppCompatActivity {
 
 
     private void initRecyclerView2() {
-        GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
+        GalleryLayoutManager manager = new GalleryLayoutManager(this,LinearLayoutManager.HORIZONTAL);
         manager.attach(recyclerView2,100);
-        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f,30));
         recyclerView2.setLayoutManager(manager);
-
-
-
-//        LinearLayoutManager manager = new LinearLayoutManager(this);
-//        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        recyclerView2.setLayoutManager(manager);
-//        ScrollHelper2 snapHelper = new ScrollHelper2();
-//        snapHelper.attachToRecyclerView(recyclerView2);
-
-
         Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
         recyclerView2.setAdapter(adapter);
-        //recyclerView2.scrollToPosition(adapter.getData().size()*10);
     }
 
 

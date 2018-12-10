@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -22,7 +23,8 @@ import android.view.View;
 public class GalleryLinearSnapHelper extends LinearSnapHelper {
 
     private static final float INVALID_DISTANCE = 1f;
-    private static final float MILLISECONDS_PER_INCH = 40f;
+    private static final float MILLISECONDS_PER_INCH = 100.0f;
+    private static final int MAX_SCROLL_ON_FLING_DURATION = 100; // ms
     private RecyclerView mRecyclerView;
     private OrientationHelper mHorizontalHelper;
 
@@ -56,9 +58,22 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
                 //这个地方可以自己设置
                 return MILLISECONDS_PER_INCH / displayMetrics.densityDpi;
             }
+
+            @Override
+            protected int calculateTimeForScrolling(int dx) {
+                return Math.min(MAX_SCROLL_ON_FLING_DURATION, super.calculateTimeForScrolling(dx));
+            }
         };
     }
 
+    /**
+     * 提供一个用于对齐的Adapter 目标position,抽象方法，需要子类自己实现
+     * 发现滚动时候，会滑动多个item，如果相对item个数做限制，可以在findTargetSnapPosition()方法中处理。
+     * @param layoutManager                 layoutManager
+     * @param velocityX                     velocityX
+     * @param velocityY                     velocityY
+     * @return
+     */
     @Override
     public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
         if (!(layoutManager instanceof RecyclerView.SmoothScroller.ScrollVectorProvider)) {
@@ -89,12 +104,10 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
 
         //在松手之后,列表最多只能滚多一屏的item数
         int deltaThreshold = layoutManager.getWidth() / getHorizontalHelper(layoutManager).getDecoratedMeasurement(currentView);
-
+        Log.d("GalleryLinearSnapHelper", "---deltaThreshold---"+deltaThreshold+"");
         int hDeltaJump;
         if (layoutManager.canScrollHorizontally()) {
-            hDeltaJump = estimateNextPositionDiffForFling(layoutManager,
-                    getHorizontalHelper(layoutManager), velocityX, 0);
-
+            hDeltaJump = estimateNextPositionDiffForFling(layoutManager, getHorizontalHelper(layoutManager), velocityX, 0);
             if (hDeltaJump > deltaThreshold) {
                 hDeltaJump = deltaThreshold;
             }
@@ -105,6 +118,7 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
             if (vectorForEnd.x < 0) {
                 hDeltaJump = -hDeltaJump;
             }
+            Log.d("GalleryLinearSnapHelper", "+++-hDeltaJump-+++"+hDeltaJump+"");
         } else {
             hDeltaJump = 0;
         }
@@ -112,14 +126,16 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
         if (hDeltaJump == 0) {
             return RecyclerView.NO_POSITION;
         }
-
+        Log.d("GalleryLinearSnapHelper", "---hDeltaJump---"+hDeltaJump+"");
         int targetPos = currentPosition + hDeltaJump;
         if (targetPos < 0) {
             targetPos = 0;
         }
+        Log.d("GalleryLinearSnapHelper", "+++targetPos+++"+targetPos+"");
         if (targetPos >= itemCount) {
             targetPos = itemCount - 1;
         }
+        Log.d("GalleryLinearSnapHelper", "---targetPos---"+targetPos+"");
         return targetPos;
     }
 

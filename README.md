@@ -242,6 +242,7 @@ recyclerView.setAdapter(adapter);
 - v1.3.2 17年10月21日 添加跑马灯轮播到该lib库中
 - v1.3.6 18年9月15日 同行提议更新API方法说明
 - v1.3.7 18年4月到6月17日   抽取项目中代码增加了recyclerView轮播图
+- v1.4.0 18年12月10日     修改了recyclerView轮播图滑动卡顿现象
 
 
 #### 关于其他内容介绍

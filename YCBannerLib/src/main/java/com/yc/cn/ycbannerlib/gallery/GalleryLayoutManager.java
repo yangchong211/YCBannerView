@@ -1,7 +1,9 @@
 package com.yc.cn.ycbannerlib.gallery;
 
+import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,10 +19,10 @@ import com.yc.cn.ycbannerlib.BuildConfig;
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/3/18
  *     desc  : 自定义LayoutManager
- *     revise:
+ *     revise: 这也也是间接参考LinearLayoutManager源码
  * </pre>
  */
-public class GalleryLayoutManager extends RecyclerView.LayoutManager implements RecyclerView.SmoothScroller.ScrollVectorProvider {
+public class GalleryLayoutManager extends LinearLayoutManager implements RecyclerView.SmoothScroller.ScrollVectorProvider {
 
     private static final String TAG = "GalleryLayoutManager";
     private final static int LAYOUT_START = -1;
@@ -37,7 +39,8 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
     private ItemTransformer mItemTransformer;
 
 
-    public GalleryLayoutManager(int orientation) {
+    public GalleryLayoutManager(Context context, int orientation) {
+        super(context);
         mOrientation = orientation;
     }
 
@@ -101,6 +104,12 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
     }
 
 
+    /**
+     * 该方法作用是启动到适配器位置的平滑滚动，必须重写，否则无法实现滚动
+     * @param recyclerView                  recyclerView
+     * @param state                         state状态
+     * @param position                      position索引
+     */
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
         GallerySmoothScroller linearSmoothScroller = new GallerySmoothScroller(recyclerView.getContext());
@@ -702,9 +711,8 @@ public class GalleryLayoutManager extends RecyclerView.LayoutManager implements 
 
     private static void logger(String log){
         if (BuildConfig.DEBUG){
-
+            Log.e(TAG,log);
         }
-        Log.e(TAG,log);
     }
 
 }

@@ -98,6 +98,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="8.recyclerView首页轮播图"/>
+        android:text="9.recyclerView首页轮播图"/>
+
+    <TextView
+        android:id="@+id/tv_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="10.recyclerView滑动卡片"/>
 
 </LinearLayout>

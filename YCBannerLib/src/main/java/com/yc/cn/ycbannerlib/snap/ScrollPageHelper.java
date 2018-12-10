@@ -166,10 +166,6 @@ public class ScrollPageHelper extends PagerSnapHelper {
             View child = layoutManager.findViewByPosition(firstChild);
 
             float visibleWidth;
-
-            // We should return the child if it's visible width
-            // is greater than 0.5 of it's total width.
-            // In a RTL configuration, we need to check the start point and in LTR the end point
             if (isRtlHorizontal) {
                 visibleWidth = (float) (helper.getTotalSpace() - helper.getDecoratedStart(child))
                         / helper.getDecoratedMeasurement(child);
@@ -177,9 +173,6 @@ public class ScrollPageHelper extends PagerSnapHelper {
                 visibleWidth = (float) helper.getDecoratedEnd(child)
                         / helper.getDecoratedMeasurement(child);
             }
-
-            // If we're at the end of the list, we shouldn't snap
-            // to avoid having the last item not completely visible.
             boolean endOfList;
             if (!reverseLayout) {
                 endOfList = ((LinearLayoutManager) layoutManager)
@@ -198,8 +191,6 @@ public class ScrollPageHelper extends PagerSnapHelper {
             } else if (endOfList) {
                 return null;
             } else {
-                // If the child wasn't returned, we need to return
-                // the next view close to the start.
                 return reverseLayout ? layoutManager.findViewByPosition(firstChild - offset)
                         : layoutManager.findViewByPosition(firstChild + offset);
             }
@@ -239,8 +230,6 @@ public class ScrollPageHelper extends PagerSnapHelper {
                         / helper.getDecoratedMeasurement(child);
             }
 
-            // If we're at the start of the list, we shouldn't snap
-            // to avoid having the first item not completely visible.
             boolean startOfList;
             if (!reverseLayout) {
                 startOfList = ((LinearLayoutManager) layoutManager)
@@ -258,7 +247,6 @@ public class ScrollPageHelper extends PagerSnapHelper {
             } else if (startOfList) {
                 return null;
             } else {
-                // If the child wasn't returned, we need to return the previous view
                 return reverseLayout ? layoutManager.findViewByPosition(lastChild + offset)
                         : layoutManager.findViewByPosition(lastChild - offset);
             }

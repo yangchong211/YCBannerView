@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 
+import com.yc.cn.ycbannerlib.LibUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 /**
  * <pre>
@@ -27,7 +28,7 @@ public class IconHintView extends ShapeHintView {
 
 
     public IconHintView(Context context, @DrawableRes int focusResId, @DrawableRes int normalResId) {
-        this(context, focusResId, normalResId, BannerView.dip2px(context,32));
+        this(context, focusResId, normalResId, LibUtils.dip2px(context,32));
     }
 
     public IconHintView(Context context, @DrawableRes int focusResId, @DrawableRes int normalResId, int size) {

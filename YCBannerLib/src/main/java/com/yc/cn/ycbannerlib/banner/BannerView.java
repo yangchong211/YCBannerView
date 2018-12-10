@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
+import com.yc.cn.ycbannerlib.LibUtils;
 import com.yc.cn.ycbannerlib.R;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.TextHintView;
@@ -165,7 +166,7 @@ public class BannerView extends RelativeLayout {
 		paddingRight = (int) type.getDimension(R.styleable.BannerView_hint_paddingRight, 0);
 		paddingTop = (int) type.getDimension(R.styleable.BannerView_hint_paddingTop, 0);
 		paddingBottom = (int) type.getDimension(R.styleable.BannerView_hint_paddingBottom
-                , dip2px(getContext(),4));
+                , LibUtils.dip2px(getContext(),4));
 
 		mViewPager = new ViewPager(getContext());
 		mViewPager.setId(R.id.banner_inner);
@@ -245,7 +246,7 @@ public class BannerView extends RelativeLayout {
         if (heightMode == MeasureSpec.EXACTLY) {
             height = cHeight;
         } else {
-            height = dip2px(getContext(),200f);
+            height = LibUtils.dip2px(getContext(),200f);
         }
         setMeasuredDimension(width, height);
     }
@@ -273,8 +274,7 @@ public class BannerView extends RelativeLayout {
                     cur=0;
                 }
                 rollPagerView.getViewPager().setCurrentItem(cur);
-                rollPagerView.mHintViewDelegate.setCurrentPosition(cur,
-                        (BaseHintView) rollPagerView.mHintView);
+                rollPagerView.mHintViewDelegate.setCurrentPosition(cur, (BaseHintView) rollPagerView.mHintView);
                 //假如说轮播图只有一张，那么就停止轮播
                 if (rollPagerView.mAdapter.getCount()<=1){
                     rollPagerView.stopPlay();
@@ -590,13 +590,6 @@ public class BannerView extends RelativeLayout {
             initHint(hintView);
         }
     }
-
-
-    public static int dip2px(Context ctx, float dpValue) {
-        final float scale = ctx.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
 
     private OnPageListener mOnPageListener;
     public interface OnPageListener {

@@ -30,6 +30,8 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 public class NightActivity extends AppCompatActivity {
 
     private GalleryRecyclerView mRecyclerView;
+    private GalleryRecyclerView recyclerView2;
+    private RecyclerView recyclerView3;
     private ArrayList<Integer> data = new ArrayList<>();
     private FrameLayout fl_container;
 
@@ -42,18 +44,22 @@ public class NightActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eight);
+        setContentView(R.layout.activity_night);
         StateAppBar.translucentStatusBar(this,true);
         mRecyclerView = findViewById(R.id.recyclerView);
         fl_container = findViewById(R.id.fl_container);
+        recyclerView2 = findViewById(R.id.recyclerView2);
+        recyclerView3 = findViewById(R.id.recyclerView3);
         initRecyclerView();
+        initRecyclerView2();
+        initRecyclerView3();
     }
 
     private void initRecyclerView() {
         Snap3Adapter adapter = new Snap3Adapter(this);
         adapter.setData(getData());
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setFlingSpeed(0);
+        mRecyclerView.setFlingSpeed(15000);
         mRecyclerView.setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(RecyclerView recyclerView, View item, int position) {
@@ -62,19 +68,47 @@ public class NightActivity extends AppCompatActivity {
                 setBlurImage(true);
             }
         });
-        GalleryLayoutManager manager = new GalleryLayoutManager(LinearLayoutManager.HORIZONTAL);
+        GalleryLayoutManager manager = new GalleryLayoutManager(this, LinearLayoutManager.HORIZONTAL);
         //attach，绑定recyclerView，并且设置默认选中索引的位置
         manager.attach(100);
         //设置缩放比例因子，在0到1.0之间即可
-        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f));
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.2f,30));
         mRecyclerView.setLayoutManager(manager);
         GalleryLinearSnapHelper mSnapHelper = new GalleryLinearSnapHelper(mRecyclerView);
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.onStart();
     }
 
+    private void initRecyclerView2() {
+        Snap3Adapter adapter = new Snap3Adapter(this);
+        adapter.setData(getData());
+        recyclerView2.setAdapter(adapter);
+        recyclerView2.setFlingSpeed(8000);
+        GalleryLayoutManager manager = new GalleryLayoutManager(this, LinearLayoutManager.HORIZONTAL);
+        //attach，绑定recyclerView，并且设置默认选中索引的位置
+        manager.attach(100);
+        //设置缩放比例因子，在0到1.0之间即可
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.0f,30));
+        recyclerView2.setLayoutManager(manager);
+        GalleryLinearSnapHelper mSnapHelper = new GalleryLinearSnapHelper(recyclerView2);
+        mSnapHelper.attachToRecyclerView(recyclerView2);
+        recyclerView2.onStart();
+    }
+
+
+    private void initRecyclerView3() {
+        GalleryLayoutManager manager = new GalleryLayoutManager(this, LinearLayoutManager.HORIZONTAL);
+        manager.attach(recyclerView3,100);
+        manager.setItemTransformer(new GalleryScaleTransformer( 0.0f,30));
+        recyclerView3.setLayoutManager(manager);
+        Snap3Adapter adapter = new Snap3Adapter(this);
+        adapter.setData(getData());
+        recyclerView3.setAdapter(adapter);
+    }
+
 
     private ArrayList<Integer> getData(){
+        data.clear();
         TypedArray bannerImage = getResources().obtainTypedArray(R.array.banner_image);
         for (int i = 0; i < 12 ; i++) {
             int image = bannerImage.getResourceId(i, R.drawable.beauty1);

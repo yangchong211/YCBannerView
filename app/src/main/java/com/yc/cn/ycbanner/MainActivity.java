@@ -21,6 +21,7 @@ import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,12 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
-        marqueeView = (MarqueeView) findViewById(R.id.marqueeView);
+        marqueeView = findViewById(R.id.marqueeView);
         initMarqueeView();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             initBitmap();
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initBitmap() {
