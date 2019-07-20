@@ -66,10 +66,12 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
     }
 
     private void initPosition(){
-        if (mViewPager.getViewPager().getCurrentItem() == 0&&getRealCount()>0){
-            int half = Integer.MAX_VALUE/2;
-            int start = half - half%getRealCount();
-            setCurrent(start);
+        if (getRealCount()>1){
+            if (mViewPager.getViewPager().getCurrentItem() == 0&&getRealCount()>0){
+                int half = Integer.MAX_VALUE/2;
+                int start = half - half%getRealCount();
+                setCurrent(start);
+            }
         }
     }
 
@@ -126,7 +128,7 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
     @Override
     public final int getCount() {
         //设置最大轮播图数量
-        return getRealCount()<=0?getRealCount(): Integer.MAX_VALUE;
+        return getRealCount()<=1?getRealCount(): Integer.MAX_VALUE;
     }
 
     /**

@@ -14,6 +14,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -189,8 +190,14 @@ public class BannerView extends RelativeLayout {
             public boolean onSingleTapUp(MotionEvent e) {
                 if (mOnItemClickListener!=null){
                     if (mAdapter instanceof AbsLoopPagerAdapter){
-                        int i = mViewPager.getCurrentItem() % (
-                                (AbsLoopPagerAdapter) mAdapter).getRealCount();
+                        int count = ((AbsLoopPagerAdapter) mAdapter).getRealCount();
+                        if (count<=1){
+
+                        }else {
+
+                        }
+                        int i = mViewPager.getCurrentItem() % count;
+                        Log.d("轮播图",count+"---"+i+"-----"+mViewPager.getCurrentItem());
                         mOnItemClickListener.onItemClick(i);
                     }else {
                         mOnItemClickListener.onItemClick(mViewPager.getCurrentItem());
@@ -264,7 +271,9 @@ public class BannerView extends RelativeLayout {
             BannerView rollPagerView = mRollPagerView.get();
             //注意这个地方需要添加非空判断
             if(rollPagerView!=null){
-                int cur = rollPagerView.getViewPager().getCurrentItem()+1;
+                int currentItem = rollPagerView.getViewPager().getCurrentItem();
+                Log.d("轮播图---0--",currentItem+"---");
+                int cur = currentItem+1;
                 //如果cur大于或等于轮播图数量，那么播放到最后一张后时，接着轮播便是索引为0的图片
                 if(cur>=rollPagerView.mAdapter.getCount()){
                     cur=0;
@@ -273,6 +282,8 @@ public class BannerView extends RelativeLayout {
                 rollPagerView.mHintViewDelegate.setCurrentPosition(cur,
                         (BaseHintView) rollPagerView.mHintView);
                 //假如说轮播图只有一张，那么就停止轮播
+                int count = rollPagerView.mAdapter.getCount();
+                Log.d("轮播图---1--",count+"---");
                 if (rollPagerView.mAdapter.getCount()<=1){
                     rollPagerView.stopPlay();
                 }
@@ -291,6 +302,9 @@ public class BannerView extends RelativeLayout {
         public void run() {
             BannerView rollPagerView = mRollPagerView.get();
             if (rollPagerView!=null){
+                int count = rollPagerView.mAdapter.getCount();
+                //假如说轮播图只有一张，那么就停止轮播
+                Log.d("轮播图---2--",count+"---");
                 if(rollPagerView.isShown() && System.currentTimeMillis()-rollPagerView
                         .mRecentTouchTime>rollPagerView.delay){
                     rollPagerView.mHandler.sendEmptyMessage(0);

@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -67,7 +68,7 @@ public class SecondActivity extends AppCompatActivity {
         banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(SecondActivity.this,position+"被点击呢",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -92,7 +93,7 @@ public class SecondActivity extends AppCompatActivity {
 
         @Override
         public int getRealCount() {
-            return imgs.length;
+            return 1;
         }
     }
 
