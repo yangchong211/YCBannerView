@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  *     time  : 2016/3/18
  *     desc  : 动态管理的Adapter。概念参照{@link android.support.v4.app.FragmentPagerAdapter}
  *             每次都会创建新view，销毁旧View。节省内存消耗性能
- *     revise:
+ *     revise: 比如使用场景是启动引导页
  * </pre>
  */
 public abstract class AbsDynamicPagerAdapter extends PagerAdapter {

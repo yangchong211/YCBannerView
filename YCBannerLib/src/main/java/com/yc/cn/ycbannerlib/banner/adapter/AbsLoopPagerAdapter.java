@@ -22,7 +22,7 @@ import java.util.ArrayList;
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/3/18
  *     desc  : AbsLoopPagerAdapter
- *     revise:
+ *     revise: 如果是自动轮播图的话就用这一个
  * </pre>
  */
 public abstract class AbsLoopPagerAdapter extends PagerAdapter {
@@ -125,11 +125,22 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
     @Deprecated
     @Override
     public final int getCount() {
+        //设置最大轮播图数量
         return getRealCount()<=0?getRealCount(): Integer.MAX_VALUE;
     }
 
+    /**
+     * 获取轮播图数量
+     * @return                          数量
+     */
     public abstract int getRealCount();
 
+    /**
+     * 创建view
+     * @param container                 viewGroup
+     * @param position                  索引
+     * @return
+     */
     public abstract View getView(ViewGroup container, int position);
 
 }

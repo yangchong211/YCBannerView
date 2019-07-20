@@ -5,7 +5,7 @@ package com.yc.cn.ycbannerlib.banner.inter;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/3/18
- *     desc  :
+ *     desc  : 所有指示器的接口
  *     revise:
  * </pre>
  */

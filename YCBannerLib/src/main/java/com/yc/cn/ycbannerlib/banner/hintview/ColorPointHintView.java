@@ -34,7 +34,8 @@ public class ColorPointHintView extends ShapeHintView {
         GradientDrawable dotFocus = new GradientDrawable();
         dotFocus.setColor(focusColor);
         dotFocus.setCornerRadius(LibUtils.dip2px(getContext(), 4));
-        dotFocus.setSize(LibUtils.dip2px(getContext(), 8), LibUtils.dip2px(getContext(), 8));
+        dotFocus.setSize(LibUtils.dip2px(getContext(), 8),
+                LibUtils.dip2px(getContext(), 8));
         return dotFocus;
     }
 
@@ -43,7 +44,8 @@ public class ColorPointHintView extends ShapeHintView {
         GradientDrawable dotNormal = new GradientDrawable();
         dotNormal.setColor(normalColor);
         dotNormal.setCornerRadius(LibUtils.dip2px(getContext(), 4));
-        dotNormal.setSize(LibUtils.dip2px(getContext(), 8), LibUtils.dip2px(getContext(), 8));
+        dotNormal.setSize(LibUtils.dip2px(getContext(), 8),
+                LibUtils.dip2px(getContext(), 8));
         return dotNormal;
     }
 

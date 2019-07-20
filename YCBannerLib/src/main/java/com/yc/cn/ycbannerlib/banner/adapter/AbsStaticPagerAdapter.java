@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *     time  : 2016/3/18
  *     desc  : 静态存储的Adapter,概念参照{@link android.support.v4.app.FragmentStatePagerAdapter}
  *             view添加进去就不管了，View长在，内存不再
- *     revise:
+ *     revise: 如果是静态轮播图就用这个
  * </pre>
  */
 public abstract class AbsStaticPagerAdapter extends PagerAdapter {

@@ -53,15 +53,6 @@ import java.util.TimerTask;
 public class BannerView extends RelativeLayout {
 
 
-    /**
-     * 轮播图红点是0，数字是1
-     * 后期还可以加入其他的
-     */
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface HintMode {
-        int COLOR_POINT_HINT = 0;
-        int TEXT_HINT = 1;
-    }
 
 
 	private ViewPager mViewPager;
@@ -156,6 +147,7 @@ public class BannerView extends RelativeLayout {
 			removeView(mViewPager);
 		}
 
+		//初始化自定义属性
 		TypedArray type = getContext().obtainStyledAttributes(attrs, R.styleable.BannerView);
         hintMode = type.getInteger(R.styleable.BannerView_hint_mode, 0);
         gravity = type.getInteger(R.styleable.BannerView_hint_gravity, 1);
@@ -167,17 +159,19 @@ public class BannerView extends RelativeLayout {
 		paddingTop = (int) type.getDimension(R.styleable.BannerView_hint_paddingTop, 0);
 		paddingBottom = (int) type.getDimension(R.styleable.BannerView_hint_paddingBottom
                 , LibUtils.dip2px(getContext(),4));
+        type.recycle();
 
+        //创建ViewPager
 		mViewPager = new ViewPager(getContext());
 		mViewPager.setId(R.id.banner_inner);
 		mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT
                 , LayoutParams.MATCH_PARENT));
 		addView(mViewPager);
-		type.recycle();
-		if(hintMode==HintMode.COLOR_POINT_HINT){
+
+		if(hintMode== BannerConstant.HintMode.COLOR_POINT_HINT){
             initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
                     , Color.parseColor("#88ffffff")));
-        }else if(hintMode==HintMode.TEXT_HINT){
+        }else if(hintMode== BannerConstant.HintMode.TEXT_HINT){
             initHint(new TextHintView(getContext()));
         }else {
             initHint(new ColorPointHintView(getContext(), Color.parseColor("#E3AC42")
@@ -189,12 +183,14 @@ public class BannerView extends RelativeLayout {
 
     private void initGestureDetector() {
         //手势处理
-        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener(){
+        mGestureDetector = new GestureDetector(getContext(),
+                new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 if (mOnItemClickListener!=null){
                     if (mAdapter instanceof AbsLoopPagerAdapter){
-                        int i = mViewPager.getCurrentItem() % ((AbsLoopPagerAdapter) mAdapter).getRealCount();
+                        int i = mViewPager.getCurrentItem() % (
+                                (AbsLoopPagerAdapter) mAdapter).getRealCount();
                         mOnItemClickListener.onItemClick(i);
                     }else {
                         mOnItemClickListener.onItemClick(mViewPager.getCurrentItem());
@@ -274,7 +270,8 @@ public class BannerView extends RelativeLayout {
                     cur=0;
                 }
                 rollPagerView.getViewPager().setCurrentItem(cur);
-                rollPagerView.mHintViewDelegate.setCurrentPosition(cur, (BaseHintView) rollPagerView.mHintView);
+                rollPagerView.mHintViewDelegate.setCurrentPosition(cur,
+                        (BaseHintView) rollPagerView.mHintView);
                 //假如说轮播图只有一张，那么就停止轮播
                 if (rollPagerView.mAdapter.getCount()<=1){
                     rollPagerView.stopPlay();
@@ -540,7 +537,7 @@ public class BannerView extends RelativeLayout {
      * 设置位置
      * @param g             位置
      */
-    public void setHintGravity(int g){
+    public void setHintGravity(@BannerConstant.HintGravity int g){
         this.gravity = g;
         //loadHintView();
         mHintViewDelegate.initView(mAdapter == null ? 0 : mAdapter.getCount(),
@@ -551,7 +548,7 @@ public class BannerView extends RelativeLayout {
      * 设置指示器样式
      * @param mode          样式：文字/红点
      */
-    public void setHintMode(@HintMode int mode){
+    public void setHintMode(@BannerConstant.HintMode int mode){
         hintMode = mode;
     }
 

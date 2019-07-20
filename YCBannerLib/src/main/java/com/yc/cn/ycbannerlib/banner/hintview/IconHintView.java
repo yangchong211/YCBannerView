@@ -31,7 +31,8 @@ public class IconHintView extends ShapeHintView {
         this(context, focusResId, normalResId, LibUtils.dip2px(context,32));
     }
 
-    public IconHintView(Context context, @DrawableRes int focusResId, @DrawableRes int normalResId, int size) {
+    public IconHintView(Context context, @DrawableRes int focusResId,
+                        @DrawableRes int normalResId, int size) {
         super(context);
         this.focusResId = focusResId;
         this.normalResId = normalResId;
@@ -71,7 +72,8 @@ public class IconHintView extends ShapeHintView {
     private Bitmap drawableToBitmap(Drawable drawable) {
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();
-        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ?
+                Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
         Bitmap bitmap = Bitmap.createBitmap(width, height, config);
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, width, height);

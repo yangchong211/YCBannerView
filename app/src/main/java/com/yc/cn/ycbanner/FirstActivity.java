@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.yc.cn.ycbannerlib.banner.BannerConstant;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
+import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 
 
 /**
@@ -67,11 +69,12 @@ public class FirstActivity extends AppCompatActivity {
         //设置轮播时间
         banner.setPlayDelay(2000);
         //设置轮播图适配器，必须
-        banner.setAdapter(new ImageNormalAdapter());
+        banner.setAdapter(new ImageNormalAdapter(banner));
         //设置位置
         banner.setHintGravity(1);
         //设置指示器样式
-        banner.setHintMode(BannerView.HintMode.TEXT_HINT);
+        banner.setHintMode(BannerConstant.HintMode.COLOR_POINT_HINT);
+        banner.setHintPadding(20,0, 20,20);
         //判断轮播是否进行
         boolean playing = banner.isPlaying();
         //轮播图点击事件
@@ -90,7 +93,12 @@ public class FirstActivity extends AppCompatActivity {
         });
     }
 
-    private class ImageNormalAdapter extends AbsDynamicPagerAdapter {
+
+    private class ImageNormalAdapter extends AbsLoopPagerAdapter {
+
+        public ImageNormalAdapter(BannerView viewPager) {
+            super(viewPager);
+        }
 
         @Override
         public View getView(ViewGroup container, int position) {
@@ -98,14 +106,13 @@ public class FirstActivity extends AppCompatActivity {
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs[position]);
-            Bitmap bitmap1 = ImageBitmapUtils.compressImage(bitmap, bitmap.getByteCount()/5);
+            Bitmap bitmap1 = ImageBitmapUtils.compressByQuality(bitmap, 50, false);
             view.setImageBitmap(bitmap1);
             return view;
         }
 
-
         @Override
-        public int getCount() {
+        public int getRealCount() {
             return imgs.length;
         }
     }
