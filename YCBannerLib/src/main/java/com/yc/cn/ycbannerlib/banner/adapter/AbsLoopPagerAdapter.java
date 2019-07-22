@@ -27,8 +27,11 @@ import java.util.ArrayList;
  */
 public abstract class AbsLoopPagerAdapter extends PagerAdapter {
 
-    private BannerView mViewPager;
 
+    private BannerView mViewPager;
+    /**
+     * 用来存放View的集合
+     */
     private ArrayList<View> mViewList = new ArrayList<>();
 
     private class LoopHintViewDelegate implements HintViewDelegate {
@@ -47,6 +50,9 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         }
     }
 
+    /**
+     * 刷新全部
+     */
     @Override
     public void notifyDataSetChanged() {
         mViewList.clear();
@@ -54,11 +60,20 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         super.notifyDataSetChanged();
     }
 
+    /**
+     * 获取item索引
+     * @param object                        objcet
+     * @return
+     */
     @Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
 
+    /**
+     * 注册数据观察者监听
+     * @param observer                      observer
+     */
     @Override
     public void registerDataSetObserver(@NonNull DataSetObserver observer) {
         super.registerDataSetObserver(observer);
@@ -75,6 +90,10 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         }
     }
 
+    /**
+     * 设置位置，利用反射实现
+     * @param index                         索引
+     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void setCurrent(int index){
         try {
@@ -96,11 +115,23 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         return arg0==arg1;
     }
 
+    /**
+     * 如果页面不是当前显示的页面也不是要缓存的页面，会调用这个方法，将页面销毁。
+     * @param container                     container
+     * @param position                      索引
+     * @param object                        object
+     */
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 
+    /**
+     *  要显示的页面或需要缓存的页面，会调用这个方法进行布局的初始化。
+     * @param container                     container
+     * @param position                      索引
+     * @return
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -110,7 +141,12 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         return itemView;
     }
 
-
+    /**
+     * 这个是避免重复创建，如果集合中有，则取集合中的
+     * @param container                     container
+     * @param position                      索引
+     * @return
+     */
     private View findViewByPosition(ViewGroup container, int position){
         for (View view : mViewList) {
             if (((int)view.getTag()) == position&&view.getParent()==null){
@@ -127,7 +163,8 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
     @Deprecated
     @Override
     public final int getCount() {
-        //设置最大轮播图数量
+        //设置最大轮播图数量 ，如果是1那么就是1，不轮播；如果大于1则设置一个最大值，可以轮播
+        //return getRealCount();
         return getRealCount()<=1?getRealCount(): Integer.MAX_VALUE;
     }
 
