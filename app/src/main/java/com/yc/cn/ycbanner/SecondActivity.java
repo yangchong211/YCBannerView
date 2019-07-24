@@ -5,15 +5,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.yc.cn.ycbannerlib.banner.BannerView;
+import com.yc.cn.ycbannerlib.banner.view.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
-import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 
 /**
  * Created by PC on 2017/11/21.

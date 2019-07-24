@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yc.cn.ycbannerlib.banner.BannerView;
+import com.yc.cn.ycbannerlib.banner.view.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.IconHintView;
 

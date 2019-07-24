@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 
 import com.yc.cn.ycbannerlib.LibUtils;
-import com.yc.cn.ycbannerlib.banner.BannerView;
+
 /**
  * <pre>
  *     @author yangchong

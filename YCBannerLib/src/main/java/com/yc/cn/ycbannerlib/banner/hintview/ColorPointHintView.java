@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 
 import com.yc.cn.ycbannerlib.LibUtils;
-import com.yc.cn.ycbannerlib.banner.BannerView;
 
 /**
  * <pre>

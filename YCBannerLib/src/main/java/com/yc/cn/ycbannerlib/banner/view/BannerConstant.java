@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.banner;
+package com.yc.cn.ycbannerlib.banner.view;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

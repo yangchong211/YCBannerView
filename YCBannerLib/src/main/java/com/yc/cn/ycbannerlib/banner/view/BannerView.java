@@ -1,4 +1,4 @@
-package com.yc.cn.ycbannerlib.banner;
+package com.yc.cn.ycbannerlib.banner.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -31,8 +31,7 @@ import com.yc.cn.ycbannerlib.banner.hintview.TextHintView;
 import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 import com.yc.cn.ycbannerlib.banner.hintview.ColorPointHintView;
 import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.Timer;
@@ -56,7 +55,7 @@ public class BannerView extends RelativeLayout {
 
 
 
-	private ViewPager mViewPager;
+	private BannerViewPager mViewPager;
 	private PagerAdapter mAdapter;
     private GestureDetector mGestureDetector;
 
@@ -163,7 +162,7 @@ public class BannerView extends RelativeLayout {
         type.recycle();
 
         //创建ViewPager
-		mViewPager = new ViewPager(getContext());
+		mViewPager = new BannerViewPager(getContext());
 		mViewPager.setId(R.id.banner_inner);
 		mViewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT
                 , LayoutParams.MATCH_PARENT));
