@@ -6,7 +6,12 @@
 
     <com.yc.cn.ycbannerlib.banner.view.BannerView
         android:id="@+id/banner"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="150dp"
+        app:hint_color="@color/colorAccent"
+        app:hint_gravity="center"
+        app:hint_mode="point"
+        app:play_delay="2000"/>
 
 </LinearLayout>

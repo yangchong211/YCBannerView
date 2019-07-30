@@ -71,8 +71,6 @@ public class FirstActivity extends AppCompatActivity {
         banner.setAdapter(new ImageNormalAdapter(banner));
         //设置位置
         banner.setHintGravity(1);
-        //设置指示器样式
-        banner.setHintMode(BannerConstant.HintMode.COLOR_POINT_HINT);
         banner.setHintPadding(20,0, 20,20);
         //判断轮播是否进行
         boolean playing = banner.isPlaying();
