@@ -61,6 +61,7 @@ public class SecondActivity extends AppCompatActivity {
         banner = (BannerView) findViewById(R.id.banner);
         banner.setAdapter(new ImageNormalAdapter(banner));
         banner.setHintGravity(1);
+        banner.setPlayDelay(2000);
         banner.setHintPadding(20,0, 20,20);
         banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
@@ -90,7 +91,7 @@ public class SecondActivity extends AppCompatActivity {
 
         @Override
         public int getRealCount() {
-            return 1;
+            return imgs.length;
         }
     }
 

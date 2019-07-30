@@ -41,6 +41,12 @@ public abstract class AbsDynamicPagerAdapter extends PagerAdapter {
 		return itemView;
 	}
 
+	/**
+	 * 创建view
+	 * @param container					container
+	 * @param position					索引
+	 * @return
+	 */
 	public abstract View getView(ViewGroup container, int position);
 
 }

@@ -3,8 +3,11 @@ package com.yc.cn.ycbannerlib.banner.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.yc.cn.ycbannerlib.LibUtils;
 
 import java.util.ArrayList;
 
@@ -32,6 +35,7 @@ public abstract class AbsStaticPagerAdapter extends PagerAdapter {
 	@Override
 	public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+        Log.d("PagerAdapter","销毁的方法");
     }
 
 	@Override
@@ -51,6 +55,7 @@ public abstract class AbsStaticPagerAdapter extends PagerAdapter {
         View itemView = findViewByPosition(container,position);
         container.addView(itemView);
         onBind(itemView,position);
+        Log.d("PagerAdapter","创建的方法");
 		return itemView;
 	}
 

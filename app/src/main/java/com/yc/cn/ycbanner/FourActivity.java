@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.view.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsLoopPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.hintview.TextHintView;
@@ -61,11 +62,9 @@ public class FourActivity extends AppCompatActivity {
 
     private void initBanner() {
         banner = (BannerView) findViewById(R.id.banner);
-        banner.setAnimationDuration(1000);
         banner.setHintPadding(0, 20, 20,20);
-        banner.setPlayDelay(2000);
         banner.setHintView(new TextHintView(this));
-        banner.setAdapter(new ImageNormalAdapter(banner));
+        banner.setAdapter(new ImageNormalAdapter());
         banner.setOnBannerClickListener(new BannerView.OnBannerClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -77,11 +76,7 @@ public class FourActivity extends AppCompatActivity {
 
 
 
-    private class ImageNormalAdapter extends AbsLoopPagerAdapter {
-
-        public ImageNormalAdapter(BannerView viewPager) {
-            super(viewPager);
-        }
+    private class ImageNormalAdapter extends AbsStaticPagerAdapter {
 
         @Override
         public View getView(ViewGroup container, int position) {
@@ -95,7 +90,7 @@ public class FourActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getRealCount() {
+        public int getCount() {
             return imgs.length;
         }
     }

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -62,6 +63,12 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
 
     /**
      * 获取item索引
+     *
+     * POSITION_UNCHANGED表示位置没有变化，即在添加或移除一页或多页之后该位置的页面保持不变，
+     * 可以用于一个ViewPager中最后几页的添加或移除时，保持前几页仍然不变；
+     *
+     * POSITION_NONE，表示当前页不再作为ViewPager的一页数据，将被销毁，可以用于无视View缓存的刷新；
+     * 根据传过来的参数Object来判断这个key所指定的新的位置
      * @param object                        objcet
      * @return
      */
@@ -124,6 +131,7 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+        Log.d("PagerAdapter","销毁的方法");
     }
 
     /**
@@ -138,6 +146,7 @@ public abstract class AbsLoopPagerAdapter extends PagerAdapter {
         int realPosition = position%getRealCount();
         View itemView = findViewByPosition(container,realPosition);
         container.addView(itemView);
+        Log.d("PagerAdapter","创建的方法");
         return itemView;
     }
 

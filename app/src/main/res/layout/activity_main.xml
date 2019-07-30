@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:text="3.显示红点轮播图，用代码设置属性"/>
+        android:text="3.显示红点无限自动轮播图，使用AbsLoopPagerAdapter"/>
 
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="4.静态储存轮播图的adapter，显示数字"/>
+        android:text="4.静态储存轮播图的AbsStaticPagerAdapter，显示数字"/>
 
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="5.启动图"/>
+        android:text="5.首页启动图，使用AbsDynamicPagerAdapter"/>
 
     <TextView
         android:id="@+id/tv_6"
