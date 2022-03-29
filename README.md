@@ -171,7 +171,7 @@ marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
 #### 4.1 RecyclerView轮播图简单使用
 - 在布局中
 ```
-<com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+<com.yc.gallerybannerlib.GalleryRecyclerView
     android:layout_marginTop="35dp"
     android:id="@+id/recyclerView"
     android:layout_width="match_parent"

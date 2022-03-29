@@ -7,20 +7,20 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ns.yc.ycutilslib.blurView.blur.CustomBlur;
-import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
-import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
-import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
+import com.yc.gallerybannerlib.GalleryLayoutManager;
+import com.yc.gallerybannerlib.GalleryRecyclerView;
+import com.yc.gallerybannerlib.GalleryScaleTransformer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +93,7 @@ public class EightActivity extends AppCompatActivity {
 
 
     private void initRecyclerView2() {
-        GalleryLayoutManager manager = new GalleryLayoutManager(this,LinearLayoutManager.HORIZONTAL);
+        GalleryLayoutManager manager = new GalleryLayoutManager(this, LinearLayoutManager.HORIZONTAL);
         manager.attach(recyclerView2,100);
         manager.setItemTransformer(new GalleryScaleTransformer( 0.2f,30));
         recyclerView2.setLayoutManager(manager);

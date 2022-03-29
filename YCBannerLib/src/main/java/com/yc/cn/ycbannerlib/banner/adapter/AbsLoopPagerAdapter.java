@@ -3,12 +3,13 @@ package com.yc.cn.ycbannerlib.banner.adapter;
 import android.annotation.TargetApi;
 import android.database.DataSetObserver;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.yc.cn.ycbannerlib.banner.inter.BaseHintView;
 import com.yc.cn.ycbannerlib.banner.inter.HintViewDelegate;

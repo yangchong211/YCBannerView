@@ -9,7 +9,7 @@
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="270dp">
-        <com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+        <com.yc.gallerybannerlib.GalleryRecyclerView
             android:layout_marginTop="35dp"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -17,7 +17,7 @@
     </FrameLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="30dp"
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"

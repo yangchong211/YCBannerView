@@ -1,9 +1,11 @@
 package com.yc.cn.ycbannerlib.banner.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 
 
 /**
@@ -11,7 +13,7 @@ import android.view.ViewGroup;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/3/18
- *     desc  : 动态管理的Adapter。概念参照{@link android.support.v4.app.FragmentPagerAdapter}
+ *     desc  : 动态管理的Adapter。概念参照{@link FragmentPagerAdapter}
  *             每次都会创建新view，销毁旧View。节省内存消耗性能
  *     revise: 比如使用场景是启动引导页
  * </pre>

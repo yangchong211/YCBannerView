@@ -1,15 +1,17 @@
-package com.yc.cn.ycbannerlib.gallery;
+package com.yc.snapbannerlib;
 
 import android.graphics.PointF;
-import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
 
 /**
  * <pre>
@@ -20,16 +22,33 @@ import android.view.View;
  *     revise: 关于SnapHelper源码分析可以看我博客：https://blog.csdn.net/m0_37700275/article/details/83901677
  * </pre>
  */
-public class GalleryLinearSnapHelper extends LinearSnapHelper {
+public class ScrollSnapHelper extends SnapHelper {
 
     private static final float INVALID_DISTANCE = 1f;
-    private static final float MILLISECONDS_PER_INCH = 100.0f;
-    private static final int MAX_SCROLL_ON_FLING_DURATION = 100; // ms
-    private RecyclerView mRecyclerView;
+    private static final float MILLISECONDS_PER_INCH = 40f;
     private OrientationHelper mHorizontalHelper;
+    private RecyclerView mRecyclerView;
 
-    public GalleryLinearSnapHelper(@Nullable RecyclerView recyclerView){
+
+    @Override
+    public void attachToRecyclerView(@Nullable RecyclerView recyclerView) throws IllegalStateException {
         mRecyclerView = recyclerView;
+        super.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public int[] calculateDistanceToFinalSnap(@NonNull RecyclerView.LayoutManager layoutManager, @NonNull View targetView) {
+        int[] out = new int[2];
+        if (layoutManager.canScrollHorizontally()) {
+            out[0] = distanceToStart(targetView, getHorizontalHelper(layoutManager));
+        } else {
+            out[0] = 0;
+        }
+        return out;
+    }
+
+    private int distanceToStart(View targetView, OrientationHelper helper) {
+        return helper.getDecoratedStart(targetView) - helper.getStartAfterPadding();
     }
 
     @Nullable
@@ -39,7 +58,7 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
         }
         return new LinearSmoothScroller(mRecyclerView.getContext()) {
             @Override
-            protected void onTargetFound(View targetView, RecyclerView.State state, RecyclerView.SmoothScroller.Action action) {
+            protected void onTargetFound(View targetView, RecyclerView.State state, Action action) {
                 int[] snapDistances = calculateDistanceToFinalSnap(mRecyclerView.getLayoutManager(), targetView);
                 final int dx;
                 final int dy;
@@ -55,56 +74,39 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
 
             @Override
             protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
-                //这个地方可以自己设置
                 return MILLISECONDS_PER_INCH / displayMetrics.densityDpi;
-            }
-
-            @Override
-            protected int calculateTimeForScrolling(int dx) {
-                return Math.min(MAX_SCROLL_ON_FLING_DURATION, super.calculateTimeForScrolling(dx));
             }
         };
     }
 
-    /**
-     * 提供一个用于对齐的Adapter 目标position,抽象方法，需要子类自己实现
-     * 发现滚动时候，会滑动多个item，如果相对item个数做限制，可以在findTargetSnapPosition()方法中处理。
-     * @param layoutManager                 layoutManager
-     * @param velocityX                     velocityX
-     * @param velocityY                     velocityY
-     * @return
-     */
     @Override
     public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
         if (!(layoutManager instanceof RecyclerView.SmoothScroller.ScrollVectorProvider)) {
             return RecyclerView.NO_POSITION;
         }
-
         final int itemCount = layoutManager.getItemCount();
         if (itemCount == 0) {
             return RecyclerView.NO_POSITION;
         }
-
         final View currentView = findSnapView(layoutManager);
         if (currentView == null) {
             return RecyclerView.NO_POSITION;
         }
-
         final int currentPosition = layoutManager.getPosition(currentView);
         if (currentPosition == RecyclerView.NO_POSITION) {
             return RecyclerView.NO_POSITION;
         }
-
         RecyclerView.SmoothScroller.ScrollVectorProvider vectorProvider =
                 (RecyclerView.SmoothScroller.ScrollVectorProvider) layoutManager;
         PointF vectorForEnd = vectorProvider.computeScrollVectorForPosition(itemCount - 1);
         if (vectorForEnd == null) {
+            // cannot get a vector for the given position.
             return RecyclerView.NO_POSITION;
         }
 
         //在松手之后,列表最多只能滚多一屏的item数
         int deltaThreshold = layoutManager.getWidth() / getHorizontalHelper(layoutManager).getDecoratedMeasurement(currentView);
-        Log.d("GalleryLinearSnapHelper", "---deltaThreshold---"+deltaThreshold+"");
+
         int hDeltaJump;
         if (layoutManager.canScrollHorizontally()) {
             hDeltaJump = estimateNextPositionDiffForFling(layoutManager, getHorizontalHelper(layoutManager), velocityX, 0);
@@ -114,34 +116,54 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
             if (hDeltaJump < -deltaThreshold) {
                 hDeltaJump = -deltaThreshold;
             }
-
             if (vectorForEnd.x < 0) {
                 hDeltaJump = -hDeltaJump;
             }
-            Log.d("GalleryLinearSnapHelper", "+++-hDeltaJump-+++"+hDeltaJump+"");
         } else {
             hDeltaJump = 0;
         }
-
         if (hDeltaJump == 0) {
             return RecyclerView.NO_POSITION;
         }
-        Log.d("GalleryLinearSnapHelper", "---hDeltaJump---"+hDeltaJump+"");
+
         int targetPos = currentPosition + hDeltaJump;
         if (targetPos < 0) {
             targetPos = 0;
         }
-        Log.d("GalleryLinearSnapHelper", "+++targetPos+++"+targetPos+"");
         if (targetPos >= itemCount) {
             targetPos = itemCount - 1;
         }
-        Log.d("GalleryLinearSnapHelper", "---targetPos---"+targetPos+"");
         return targetPos;
     }
 
+    @Override
+    public View findSnapView(RecyclerView.LayoutManager layoutManager) {
+        return findStartView(layoutManager, getHorizontalHelper(layoutManager));
+    }
 
-    private int estimateNextPositionDiffForFling(RecyclerView.LayoutManager layoutManager,
-                                                 OrientationHelper helper, int velocityX, int velocityY) {
+
+    private View findStartView(RecyclerView.LayoutManager layoutManager, OrientationHelper helper) {
+        if (layoutManager instanceof LinearLayoutManager) {
+            int firstChildPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+            if (firstChildPosition == RecyclerView.NO_POSITION) {
+                return null;
+            }
+            if (((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition() == layoutManager.getItemCount() - 1) {
+                return null;
+            }
+            View firstChildView = layoutManager.findViewByPosition(firstChildPosition);
+            if (helper.getDecoratedEnd(firstChildView) >= helper.getDecoratedMeasurement(firstChildView) / 2 && helper.getDecoratedEnd(firstChildView) > 0) {
+                return firstChildView;
+            } else {
+                return layoutManager.findViewByPosition(firstChildPosition + 1);
+            }
+        } else {
+            return null;
+        }
+    }
+
+
+    private int estimateNextPositionDiffForFling(RecyclerView.LayoutManager layoutManager, OrientationHelper helper, int velocityX, int velocityY) {
         int[] distances = calculateScrollDistance(velocityX, velocityY);
         float distancePerChild = computeDistancePerChild(layoutManager, helper);
         if (distancePerChild <= 0) {
@@ -154,7 +176,6 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
             return (int) Math.ceil(distance / distancePerChild);
         }
     }
-
 
     private float computeDistancePerChild(RecyclerView.LayoutManager layoutManager, OrientationHelper helper) {
         View minPosView = null;
@@ -186,9 +207,12 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
         int start = Math.min(helper.getDecoratedStart(minPosView), helper.getDecoratedStart(maxPosView));
         int end = Math.max(helper.getDecoratedEnd(minPosView), helper.getDecoratedEnd(maxPosView));
         int distance = end - start;
-        if (distance == 0) {return INVALID_DISTANCE;}
+        if (distance == 0) {
+            return INVALID_DISTANCE;
+        }
         return 1f * distance / ((maxPos - minPos) + 1);
     }
+
 
     private OrientationHelper getHorizontalHelper(RecyclerView.LayoutManager layoutManager) {
         if (mHorizontalHelper == null) {
@@ -196,5 +220,4 @@ public class GalleryLinearSnapHelper extends LinearSnapHelper {
         }
         return mHorizontalHelper;
     }
-
 }

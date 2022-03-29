@@ -1,11 +1,13 @@
 package com.yc.cn.ycbannerlib.banner.adapter;
 
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.yc.cn.ycbannerlib.LibUtils;
 
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/3/18
- *     desc  : 静态存储的Adapter,概念参照{@link android.support.v4.app.FragmentStatePagerAdapter}
+ *     desc  : 静态存储的Adapter,概念参照{@link FragmentStatePagerAdapter}
  *             view添加进去就不管了，View长在，内存不再
  *     revise: 如果是静态轮播图就用这个
  * </pre>

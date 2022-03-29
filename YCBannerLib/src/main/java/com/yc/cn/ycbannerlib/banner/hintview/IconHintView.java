@@ -7,7 +7,8 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.DrawableRes;
 
 import com.yc.cn.ycbannerlib.LibUtils;
 

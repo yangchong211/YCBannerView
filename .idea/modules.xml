@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/YCBanner.iml" filepath="$PROJECT_DIR$/YCBanner.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YCBannerLib/YCBannerLib.iml" filepath="$PROJECT_DIR$/YCBannerLib/YCBannerLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCBannerView.iml" filepath="$PROJECT_DIR$/.idea/modules/YCBannerView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GalleryBannerLib/YCBannerView.GalleryBannerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/GalleryBannerLib/YCBannerView.GalleryBannerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SnapBannerLib/YCBannerView.SnapBannerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/SnapBannerLib/YCBannerView.SnapBannerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/YCBannerLib/YCBannerView.YCBannerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/YCBannerLib/YCBannerView.YCBannerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/YCBannerView.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/YCBannerView.app.iml" />
     </modules>
   </component>
 </project>

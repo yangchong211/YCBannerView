@@ -1,16 +1,16 @@
-package com.yc.cn.ycbannerlib.gallery;
+package com.yc.gallerybannerlib;
 
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import com.yc.cn.ycbannerlib.BuildConfig;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -710,7 +710,7 @@ public class GalleryLayoutManager extends LinearLayoutManager implements Recycle
     }
 
     private static void logger(String log){
-        if (BuildConfig.DEBUG){
+        if (false){
             Log.e(TAG,log);
         }
     }

@@ -1,9 +1,9 @@
-package com.yc.cn.ycbannerlib.gallery;
+package com.yc.gallerybannerlib;
 
 
-import android.support.annotation.FloatRange;
-import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.FloatRange;
 
 /**
  * <pre>

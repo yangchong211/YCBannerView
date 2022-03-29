@@ -9,10 +9,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.ColorInt;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -23,6 +19,10 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
+
+import androidx.annotation.ColorInt;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.yc.cn.ycbannerlib.LibUtils;
 import com.yc.cn.ycbannerlib.R;
@@ -463,7 +463,7 @@ public class BannerView extends RelativeLayout {
 	public void setAdapter(PagerAdapter adapter){
 		adapter.registerDataSetObserver(new PagerObserver());
 		mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
